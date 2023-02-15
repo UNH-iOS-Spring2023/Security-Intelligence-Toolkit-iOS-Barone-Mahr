@@ -14,6 +14,11 @@
 		565C6CFB299C5DC00026EE0E /* sitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565C6CFA299C5DC00026EE0E /* sitTests.swift */; };
 		565C6D05299C5DC00026EE0E /* sitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565C6D04299C5DC00026EE0E /* sitUITests.swift */; };
 		565C6D07299C5DC00026EE0E /* sitUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565C6D06299C5DC00026EE0E /* sitUITestsLaunchTests.swift */; };
+		565C6D15299C5EC50026EE0E /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 565C6D13299C5EC50026EE0E /* Podfile */; };
+		565C6D16299C5EC50026EE0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 565C6D14299C5EC50026EE0E /* README.md */; };
+		565C6D18299C5EF60026EE0E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 565C6D17299C5EF60026EE0E /* .gitignore */; };
+		565C6D1A299C5F490026EE0E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 565C6D19299C5F490026EE0E /* GoogleService-Info.plist */; };
+		84FA7B56B797F883A8F67579 /* Pods_Security_Intelligence_Toolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5253E2F0D0A56D561149A /* Pods_Security_Intelligence_Toolkit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,16 +39,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		565C6CE6299C5DBD0026EE0E /* sit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		034C9069B70AC06E59B457E9 /* Pods-Security Intelligence Toolkit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Security Intelligence Toolkit.debug.xcconfig"; path = "Target Support Files/Pods-Security Intelligence Toolkit/Pods-Security Intelligence Toolkit.debug.xcconfig"; sourceTree = "<group>"; };
+		40809381BE17B7CC4A7872DC /* Pods-Security Intelligence Toolkit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Security Intelligence Toolkit.release.xcconfig"; path = "Target Support Files/Pods-Security Intelligence Toolkit/Pods-Security Intelligence Toolkit.release.xcconfig"; sourceTree = "<group>"; };
+		565C6CE6299C5DBD0026EE0E /* Security Intelligence Toolkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Security Intelligence Toolkit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		565C6CE9299C5DBD0026EE0E /* sitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sitApp.swift; sourceTree = "<group>"; };
 		565C6CEB299C5DBD0026EE0E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		565C6CED299C5DC00026EE0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		565C6CF0299C5DC00026EE0E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		565C6CF6299C5DC00026EE0E /* sitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		565C6CF6299C5DC00026EE0E /* Security Intelligence ToolkitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Security Intelligence ToolkitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		565C6CFA299C5DC00026EE0E /* sitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sitTests.swift; sourceTree = "<group>"; };
-		565C6D00299C5DC00026EE0E /* sitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		565C6D00299C5DC00026EE0E /* Security Intelligence ToolkitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Security Intelligence ToolkitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		565C6D04299C5DC00026EE0E /* sitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sitUITests.swift; sourceTree = "<group>"; };
 		565C6D06299C5DC00026EE0E /* sitUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sitUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		565C6D13299C5EC50026EE0E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		565C6D14299C5EC50026EE0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		565C6D17299C5EF60026EE0E /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		565C6D19299C5F490026EE0E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		565C6D1B299C5F950026EE0E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ECC5253E2F0D0A56D561149A /* Pods_Security_Intelligence_Toolkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Security_Intelligence_Toolkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84FA7B56B797F883A8F67579 /* Pods_Security_Intelligence_Toolkit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,22 +85,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2BEDBB2DBE937F916F0C1DB4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				034C9069B70AC06E59B457E9 /* Pods-Security Intelligence Toolkit.debug.xcconfig */,
+				40809381BE17B7CC4A7872DC /* Pods-Security Intelligence Toolkit.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		565C6CDD299C5DBD0026EE0E = {
 			isa = PBXGroup;
 			children = (
+				565C6D19299C5F490026EE0E /* GoogleService-Info.plist */,
+				565C6D17299C5EF60026EE0E /* .gitignore */,
+				565C6D13299C5EC50026EE0E /* Podfile */,
+				565C6D14299C5EC50026EE0E /* README.md */,
 				565C6CE8299C5DBD0026EE0E /* sit */,
 				565C6CF9299C5DC00026EE0E /* sitTests */,
 				565C6D03299C5DC00026EE0E /* sitUITests */,
 				565C6CE7299C5DBD0026EE0E /* Products */,
+				2BEDBB2DBE937F916F0C1DB4 /* Pods */,
+				72BB2C7A06ABF6721A5C5E3C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		565C6CE7299C5DBD0026EE0E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				565C6CE6299C5DBD0026EE0E /* sit.app */,
-				565C6CF6299C5DC00026EE0E /* sitTests.xctest */,
-				565C6D00299C5DC00026EE0E /* sitUITests.xctest */,
+				565C6CE6299C5DBD0026EE0E /* Security Intelligence Toolkit.app */,
+				565C6CF6299C5DC00026EE0E /* Security Intelligence ToolkitTests.xctest */,
+				565C6D00299C5DC00026EE0E /* Security Intelligence ToolkitUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,6 +124,7 @@
 		565C6CE8299C5DBD0026EE0E /* sit */ = {
 			isa = PBXGroup;
 			children = (
+				565C6D1B299C5F950026EE0E /* GoogleService-Info.plist */,
 				565C6CE9299C5DBD0026EE0E /* sitApp.swift */,
 				565C6CEB299C5DBD0026EE0E /* ContentView.swift */,
 				565C6CED299C5DC00026EE0E /* Assets.xcassets */,
@@ -127,29 +158,39 @@
 			path = sitUITests;
 			sourceTree = "<group>";
 		};
+		72BB2C7A06ABF6721A5C5E3C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ECC5253E2F0D0A56D561149A /* Pods_Security_Intelligence_Toolkit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		565C6CE5299C5DBD0026EE0E /* sit */ = {
+		565C6CE5299C5DBD0026EE0E /* Security Intelligence Toolkit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 565C6D0A299C5DC00026EE0E /* Build configuration list for PBXNativeTarget "sit" */;
+			buildConfigurationList = 565C6D0A299C5DC00026EE0E /* Build configuration list for PBXNativeTarget "Security Intelligence Toolkit" */;
 			buildPhases = (
+				C1DD02ED05CB1C8BA5A6317A /* [CP] Check Pods Manifest.lock */,
 				565C6CE2299C5DBD0026EE0E /* Sources */,
 				565C6CE3299C5DBD0026EE0E /* Frameworks */,
 				565C6CE4299C5DBD0026EE0E /* Resources */,
+				F03C405BB57FF3EB7E482B6C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = sit;
+			name = "Security Intelligence Toolkit";
 			productName = sit;
-			productReference = 565C6CE6299C5DBD0026EE0E /* sit.app */;
+			productReference = 565C6CE6299C5DBD0026EE0E /* Security Intelligence Toolkit.app */;
 			productType = "com.apple.product-type.application";
 		};
-		565C6CF5299C5DC00026EE0E /* sitTests */ = {
+		565C6CF5299C5DC00026EE0E /* Security Intelligence ToolkitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 565C6D0D299C5DC00026EE0E /* Build configuration list for PBXNativeTarget "sitTests" */;
+			buildConfigurationList = 565C6D0D299C5DC00026EE0E /* Build configuration list for PBXNativeTarget "Security Intelligence ToolkitTests" */;
 			buildPhases = (
 				565C6CF2299C5DC00026EE0E /* Sources */,
 				565C6CF3299C5DC00026EE0E /* Frameworks */,
@@ -160,14 +201,14 @@
 			dependencies = (
 				565C6CF8299C5DC00026EE0E /* PBXTargetDependency */,
 			);
-			name = sitTests;
+			name = "Security Intelligence ToolkitTests";
 			productName = sitTests;
-			productReference = 565C6CF6299C5DC00026EE0E /* sitTests.xctest */;
+			productReference = 565C6CF6299C5DC00026EE0E /* Security Intelligence ToolkitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		565C6CFF299C5DC00026EE0E /* sitUITests */ = {
+		565C6CFF299C5DC00026EE0E /* Security Intelligence ToolkitUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 565C6D10299C5DC00026EE0E /* Build configuration list for PBXNativeTarget "sitUITests" */;
+			buildConfigurationList = 565C6D10299C5DC00026EE0E /* Build configuration list for PBXNativeTarget "Security Intelligence ToolkitUITests" */;
 			buildPhases = (
 				565C6CFC299C5DC00026EE0E /* Sources */,
 				565C6CFD299C5DC00026EE0E /* Frameworks */,
@@ -178,9 +219,9 @@
 			dependencies = (
 				565C6D02299C5DC00026EE0E /* PBXTargetDependency */,
 			);
-			name = sitUITests;
+			name = "Security Intelligence ToolkitUITests";
 			productName = sitUITests;
-			productReference = 565C6D00299C5DC00026EE0E /* sitUITests.xctest */;
+			productReference = 565C6D00299C5DC00026EE0E /* Security Intelligence ToolkitUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -206,7 +247,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 565C6CE1299C5DBD0026EE0E /* Build configuration list for PBXProject "sit" */;
+			buildConfigurationList = 565C6CE1299C5DBD0026EE0E /* Build configuration list for PBXProject "Security Intelligence Toolkit" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -219,9 +260,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				565C6CE5299C5DBD0026EE0E /* sit */,
-				565C6CF5299C5DC00026EE0E /* sitTests */,
-				565C6CFF299C5DC00026EE0E /* sitUITests */,
+				565C6CE5299C5DBD0026EE0E /* Security Intelligence Toolkit */,
+				565C6CF5299C5DC00026EE0E /* Security Intelligence ToolkitTests */,
+				565C6CFF299C5DC00026EE0E /* Security Intelligence ToolkitUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -231,8 +272,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				565C6D18299C5EF60026EE0E /* .gitignore in Resources */,
+				565C6D15299C5EC50026EE0E /* Podfile in Resources */,
 				565C6CF1299C5DC00026EE0E /* Preview Assets.xcassets in Resources */,
+				565C6D16299C5EC50026EE0E /* README.md in Resources */,
 				565C6CEE299C5DC00026EE0E /* Assets.xcassets in Resources */,
+				565C6D1A299C5F490026EE0E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +296,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C1DD02ED05CB1C8BA5A6317A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Security Intelligence Toolkit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F03C405BB57FF3EB7E482B6C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Security Intelligence Toolkit/Pods-Security Intelligence Toolkit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Security Intelligence Toolkit/Pods-Security Intelligence Toolkit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Security Intelligence Toolkit/Pods-Security Intelligence Toolkit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		565C6CE2299C5DBD0026EE0E /* Sources */ = {
@@ -284,12 +371,12 @@
 /* Begin PBXTargetDependency section */
 		565C6CF8299C5DC00026EE0E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 565C6CE5299C5DBD0026EE0E /* sit */;
+			target = 565C6CE5299C5DBD0026EE0E /* Security Intelligence Toolkit */;
 			targetProxy = 565C6CF7299C5DC00026EE0E /* PBXContainerItemProxy */;
 		};
 		565C6D02299C5DC00026EE0E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 565C6CE5299C5DBD0026EE0E /* sit */;
+			target = 565C6CE5299C5DBD0026EE0E /* Security Intelligence Toolkit */;
 			targetProxy = 565C6D01299C5DC00026EE0E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -411,6 +498,7 @@
 		};
 		565C6D0B299C5DC00026EE0E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 034C9069B70AC06E59B457E9 /* Pods-Security Intelligence Toolkit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -441,6 +529,7 @@
 		};
 		565C6D0C299C5DC00026EE0E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40809381BE17B7CC4A7872DC /* Pods-Security Intelligence Toolkit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -485,7 +574,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/sit";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Security Intelligence Toolkit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Security Intelligence Toolkit";
 			};
 			name = Debug;
 		};
@@ -505,7 +594,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/sit";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Security Intelligence Toolkit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Security Intelligence Toolkit";
 			};
 			name = Release;
 		};
@@ -548,7 +637,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		565C6CE1299C5DBD0026EE0E /* Build configuration list for PBXProject "sit" */ = {
+		565C6CE1299C5DBD0026EE0E /* Build configuration list for PBXProject "Security Intelligence Toolkit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				565C6D08299C5DC00026EE0E /* Debug */,
@@ -557,7 +646,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		565C6D0A299C5DC00026EE0E /* Build configuration list for PBXNativeTarget "sit" */ = {
+		565C6D0A299C5DC00026EE0E /* Build configuration list for PBXNativeTarget "Security Intelligence Toolkit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				565C6D0B299C5DC00026EE0E /* Debug */,
@@ -566,7 +655,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		565C6D0D299C5DC00026EE0E /* Build configuration list for PBXNativeTarget "sitTests" */ = {
+		565C6D0D299C5DC00026EE0E /* Build configuration list for PBXNativeTarget "Security Intelligence ToolkitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				565C6D0E299C5DC00026EE0E /* Debug */,
@@ -575,7 +664,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		565C6D10299C5DC00026EE0E /* Build configuration list for PBXNativeTarget "sitUITests" */ = {
+		565C6D10299C5DC00026EE0E /* Build configuration list for PBXNativeTarget "Security Intelligence ToolkitUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				565C6D11299C5DC00026EE0E /* Debug */,
