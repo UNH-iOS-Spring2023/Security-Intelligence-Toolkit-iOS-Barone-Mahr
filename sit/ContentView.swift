@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  sit
+//  Security Intelligence Toolkit
 //
 //  Created by Charles Barone on 2/14/23.
 //
@@ -8,19 +8,36 @@
 import SwiftUI
 
 struct ContentView: View {
+    var showSettingsView: () -> Void
+    
+    @StateObject var app = AppVariables()
+    @EnvironmentObject var authState: AuthenticationState
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ZStack {
+            CustomColors.gray?.suColor
+                .ignoresSafeArea()
+            
+            VStack {
+                TopBarView(showSettingsView: showSettingsView)
+                    .environmentObject(authState)
+                
+                BottomBarView(
+                    AnyView(HomeView()),
+                    AnyView(ScanView()),
+                    AnyView(ShodanView()),
+                    AnyView(HistoryView())
+                )
+                .environmentObject(AppVariables())
+                .environmentObject(authState)
+            }
         }
-        .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(showSettingsView: { })
+            .environmentObject(AuthenticationState())
     }
 }
