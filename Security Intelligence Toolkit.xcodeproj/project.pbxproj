@@ -72,7 +72,7 @@
 		565C6D00299C5DC00026EE0E /* Security Intelligence ToolkitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Security Intelligence ToolkitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		565C6D04299C5DC00026EE0E /* sitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sitUITests.swift; sourceTree = "<group>"; };
 		565C6D06299C5DC00026EE0E /* sitUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sitUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		565C6D13299C5EC50026EE0E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		565C6D13299C5EC50026EE0E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		565C6D14299C5EC50026EE0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		565C6D17299C5EF60026EE0E /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		566E74DB29A2CA320055C999 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };

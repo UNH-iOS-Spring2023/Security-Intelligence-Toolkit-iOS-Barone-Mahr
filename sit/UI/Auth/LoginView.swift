@@ -17,6 +17,7 @@ struct LoginView: View {
     @State private var password: String = ""
     @State private var isShowingPassword = false
     @State private var errorMessage = ""
+    @State private var alertError = false
     
     @State private var path = NavigationPath()
     
@@ -67,6 +68,7 @@ struct LoginView: View {
                         }
                         .disabled(email.count == 0 && password.count == 0)
                         
+                        
                         Button(action: showSignUpView) {
                             Text("Sign Up")
                                 .font(.callout)
@@ -80,6 +82,9 @@ struct LoginView: View {
                         }
                     }
                     .frame(maxWidth: geometry.size.width * 0.95)
+                    .alert(errorMessage, isPresented: $alertError){ //display an alert if anything happens during this?
+                        Button("OK", role: .cancel){}
+                    }
                 }
             }
         }
@@ -94,10 +99,12 @@ struct LoginView: View {
                         // Switch to main view
                         self.errorMessage = ""
                     } else {
+                        self.alertError = true
                         self.errorMessage = "Incorrect email or password."
                     }
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
+                    self.alertError = true
             }
         }
     }
