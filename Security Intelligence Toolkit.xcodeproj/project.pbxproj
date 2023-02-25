@@ -24,13 +24,14 @@
 		565C6D15299C5EC50026EE0E /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 565C6D13299C5EC50026EE0E /* Podfile */; };
 		565C6D16299C5EC50026EE0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 565C6D14299C5EC50026EE0E /* README.md */; };
 		565C6D18299C5EF60026EE0E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 565C6D17299C5EF60026EE0E /* .gitignore */; };
-		565C6D1A299C5F490026EE0E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 565C6D19299C5F490026EE0E /* GoogleService-Info.plist */; };
 		566E74DC29A2CA320055C999 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74DB29A2CA320055C999 /* BottomBarView.swift */; };
 		566E74DE29A2CC9A0055C999 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74DD29A2CC9A0055C999 /* HomeView.swift */; };
 		566E74E029A2CCB50055C999 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74DF29A2CCB50055C999 /* ScanView.swift */; };
 		566E74E229A2CCEC0055C999 /* ShodanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74E129A2CCEC0055C999 /* ShodanView.swift */; };
 		566E74E429A2CD050055C999 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74E329A2CD050055C999 /* HistoryView.swift */; };
 		56BFE4F129A2DDFE0079216D /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */; };
+		6F7C56B729A9AF1200A32758 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F7C56B629A9AF1200A32758 /* GoogleService-Info.plist */; };
+		6F7C56B929A9AF1800A32758 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F7C56B829A9AF1800A32758 /* GoogleService-Info.plist */; };
 		84FA7B56B797F883A8F67579 /* Pods_Security_Intelligence_Toolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5253E2F0D0A56D561149A /* Pods_Security_Intelligence_Toolkit.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,14 +75,14 @@
 		565C6D13299C5EC50026EE0E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		565C6D14299C5EC50026EE0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		565C6D17299C5EF60026EE0E /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		565C6D19299C5F490026EE0E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		565C6D1B299C5F950026EE0E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		566E74DB29A2CA320055C999 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		566E74DD29A2CC9A0055C999 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		566E74DF29A2CCB50055C999 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
 		566E74E129A2CCEC0055C999 /* ShodanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShodanView.swift; sourceTree = "<group>"; };
 		566E74E329A2CD050055C999 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
+		6F7C56B629A9AF1200A32758 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6F7C56B829A9AF1800A32758 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		ECC5253E2F0D0A56D561149A /* Pods_Security_Intelligence_Toolkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Security_Intelligence_Toolkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -150,7 +151,7 @@
 		565C6CDD299C5DBD0026EE0E = {
 			isa = PBXGroup;
 			children = (
-				565C6D19299C5F490026EE0E /* GoogleService-Info.plist */,
+				6F7C56B629A9AF1200A32758 /* GoogleService-Info.plist */,
 				565C6D17299C5EF60026EE0E /* .gitignore */,
 				565C6D13299C5EC50026EE0E /* Podfile */,
 				565C6D14299C5EC50026EE0E /* README.md */,
@@ -179,7 +180,7 @@
 				566E74DA29A2CA0E0055C999 /* UI */,
 				5629AD4029A331810061A60F /* Values */,
 				56BFE4EF29A2DDE70079216D /* Models */,
-				565C6D1B299C5F950026EE0E /* GoogleService-Info.plist */,
+				6F7C56B829A9AF1800A32758 /* GoogleService-Info.plist */,
 				565C6CE9299C5DBD0026EE0E /* sitApp.swift */,
 				565C6CEB299C5DBD0026EE0E /* ContentView.swift */,
 				565C6CED299C5DC00026EE0E /* Assets.xcassets */,
@@ -351,11 +352,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				565C6D18299C5EF60026EE0E /* .gitignore in Resources */,
+				6F7C56B929A9AF1800A32758 /* GoogleService-Info.plist in Resources */,
 				565C6D15299C5EC50026EE0E /* Podfile in Resources */,
 				565C6CF1299C5DC00026EE0E /* Preview Assets.xcassets in Resources */,
 				565C6D16299C5EC50026EE0E /* README.md in Resources */,
 				565C6CEE299C5DC00026EE0E /* Assets.xcassets in Resources */,
-				565C6D1A299C5F490026EE0E /* GoogleService-Info.plist in Resources */,
+				6F7C56B729A9AF1200A32758 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,7 +598,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"sit/Preview Content\"";
-				DEVELOPMENT_TEAM = C45QVX24HL;
+				DEVELOPMENT_TEAM = 8K2PZN7Q89;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Security Intelligence Toolkit";
@@ -627,7 +629,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"sit/Preview Content\"";
-				DEVELOPMENT_TEAM = C45QVX24HL;
+				DEVELOPMENT_TEAM = 8K2PZN7Q89;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Security Intelligence Toolkit";
