@@ -30,7 +30,6 @@
 		566E74E229A2CCEC0055C999 /* ShodanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74E129A2CCEC0055C999 /* ShodanView.swift */; };
 		566E74E429A2CD050055C999 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74E329A2CD050055C999 /* HistoryView.swift */; };
 		56BFE4F129A2DDFE0079216D /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */; };
-		6F7C56B729A9AF1200A32758 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F7C56B629A9AF1200A32758 /* GoogleService-Info.plist */; };
 		6F7C56B929A9AF1800A32758 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F7C56B829A9AF1800A32758 /* GoogleService-Info.plist */; };
 		84FA7B56B797F883A8F67579 /* Pods_Security_Intelligence_Toolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5253E2F0D0A56D561149A /* Pods_Security_Intelligence_Toolkit.framework */; };
 /* End PBXBuildFile section */
@@ -311,7 +310,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					565C6CE5299C5DBD0026EE0E = {
 						CreatedOnToolsVersion = 14.1;
@@ -357,7 +356,6 @@
 				565C6CF1299C5DC00026EE0E /* Preview Assets.xcassets in Resources */,
 				565C6D16299C5EC50026EE0E /* README.md in Resources */,
 				565C6CEE299C5DC00026EE0E /* Assets.xcassets in Resources */,
-				6F7C56B729A9AF1200A32758 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

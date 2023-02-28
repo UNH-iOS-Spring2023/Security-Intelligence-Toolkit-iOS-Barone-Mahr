@@ -27,6 +27,7 @@ struct LoginView: View {
                 CustomColors.gray?.suColor
                     .ignoresSafeArea()
                 VStack(spacing: 64) {
+                    Image("sit_logo_small")
                     Text("Security Intelligence Toolkit")
                         .foregroundColor(CustomColors.purple?.suColor)
                         .bold()
