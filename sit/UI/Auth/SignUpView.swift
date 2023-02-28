@@ -17,6 +17,7 @@ struct SignUpView: View {
     @State private var passwordConf: String = ""
     @State private var isShowingPassword = false
     @State private var errorMessage = ""
+    @State private var signUpError = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -88,6 +89,9 @@ struct SignUpView: View {
                         }
                     }
                     .frame(maxWidth: geometry.size.width * 0.95)
+                    .alert(errorMessage, isPresented: $signUpError){
+                        Button("OK", role: .cancel){}
+                    }
                 }
             }
         }
@@ -104,9 +108,11 @@ struct SignUpView: View {
                         showLoginView() //if you don't call this here after a log out they'll be brought to signup again instead of login
                     } else {
                         self.errorMessage = "Sign Up Failure."
+                        self.signUpError = true
                     }
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
+                    self.signUpError = true
             }
         }
     }

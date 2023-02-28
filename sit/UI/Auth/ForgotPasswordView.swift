@@ -14,7 +14,7 @@ struct ForgotPasswordView: View {
     
     @State private var email: String = ""
     @State private var errorMessage = ""
-    @State private var showAlert = false
+    @State private var passwordErrorAlert = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -51,6 +51,9 @@ struct ForgotPasswordView: View {
                         }
                     }
                     .frame(maxWidth: geometry.size.width * 0.95)
+                    .alert(errorMessage, isPresented: $passwordErrorAlert){
+                        Button("OK", role: .cancel){}
+                    }
                 }
             }
         }
