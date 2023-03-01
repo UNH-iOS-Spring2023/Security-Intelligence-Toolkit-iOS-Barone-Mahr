@@ -72,6 +72,7 @@ struct ForgotPasswordView: View {
                     }
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
+                    self.passwordErrorAlert = true
             }
         }
     }
