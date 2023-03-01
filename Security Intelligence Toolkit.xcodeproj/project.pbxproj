@@ -15,6 +15,7 @@
 		5638AFC229A785C50072A21B /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638AFC129A785C50072A21B /* TopBarView.swift */; };
 		5638AFC429A786CC0072A21B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638AFC329A786CC0072A21B /* SettingsView.swift */; };
 		5638AFC629AED7C70072A21B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5638AFC529AED7C70072A21B /* GoogleService-Info.plist */; };
+		5638AFC829AEF9A30072A21B /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638AFC729AEF9A30072A21B /* Util.swift */; };
 		565C6CEA299C5DBD0026EE0E /* sitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565C6CE9299C5DBD0026EE0E /* sitApp.swift */; };
 		565C6CEC299C5DBD0026EE0E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565C6CEB299C5DBD0026EE0E /* ContentView.swift */; };
 		565C6CEE299C5DC00026EE0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 565C6CED299C5DC00026EE0E /* Assets.xcassets */; };
@@ -62,6 +63,7 @@
 		5638AFC129A785C50072A21B /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		5638AFC329A786CC0072A21B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5638AFC529AED7C70072A21B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "sit/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5638AFC729AEF9A30072A21B /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		565C6CE6299C5DBD0026EE0E /* Security Intelligence Toolkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Security Intelligence Toolkit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		565C6CE9299C5DBD0026EE0E /* sitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sitApp.swift; sourceTree = "<group>"; };
 		565C6CEB299C5DBD0026EE0E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				56BFE4EF29A2DDE70079216D /* Models */,
 				565C6CE9299C5DBD0026EE0E /* sitApp.swift */,
 				565C6CEB299C5DBD0026EE0E /* ContentView.swift */,
+				5638AFC729AEF9A30072A21B /* Util.swift */,
 				565C6CED299C5DC00026EE0E /* Assets.xcassets */,
 				565C6CEF299C5DC00026EE0E /* Preview Content */,
 			);
@@ -423,6 +426,7 @@
 				5638AFC429A786CC0072A21B /* SettingsView.swift in Sources */,
 				5638AFC029A781840072A21B /* AppVariables.swift in Sources */,
 				566E74E429A2CD050055C999 /* HistoryView.swift in Sources */,
+				5638AFC829AEF9A30072A21B /* Util.swift in Sources */,
 				566E74DC29A2CA320055C999 /* BottomBarView.swift in Sources */,
 				566E74DE29A2CC9A0055C999 /* HomeView.swift in Sources */,
 				5638AFC229A785C50072A21B /* TopBarView.swift in Sources */,
