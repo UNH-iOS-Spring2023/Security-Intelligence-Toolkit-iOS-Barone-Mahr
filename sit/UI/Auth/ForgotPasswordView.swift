@@ -36,19 +36,36 @@ struct ForgotPasswordView: View {
                             .placeholder(when: email.isEmpty) {
                                 Text("Email").foregroundColor(.gray)
                             }
+                            .overlay(
+                                Rectangle()
+                                    .frame(height: 1)
+                                    .foregroundColor(.white)
+                                    .offset(y: 16)
+                                    .padding(.horizontal, 0)
+                            )
                         
-                        Button(action: doForgotPassword) {
+                        Button(action: doForgotPassword, label: {
                             Text("Forgot Password")
                                 .font(.callout)
-                                .foregroundColor(.white)
-                        }
+                                .bold()
+                        })
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                        .background(CustomColors.pink?.suColor)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                        .padding(.horizontal)
                         .disabled(email.count == 0)
                         
-                        Button(action: showLoginView) {
+                        Button(action: showLoginView, label: {
                             Text("Back")
                                 .font(.callout)
-                                .foregroundColor(.white)
-                        }
+                                .bold()
+                        })
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                        .background(.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                        .padding(.horizontal)
                     }
                     .frame(maxWidth: geometry.size.width * 0.95)
                     .alert(errorMessage, isPresented: $passwordErrorAlert){
@@ -72,6 +89,7 @@ struct ForgotPasswordView: View {
                     }
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
+                    self.passwordErrorAlert = true
             }
         }
     }

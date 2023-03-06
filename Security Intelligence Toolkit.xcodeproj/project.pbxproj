@@ -14,6 +14,8 @@
 		5638AFC029A781840072A21B /* AppVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638AFBF29A781840072A21B /* AppVariables.swift */; };
 		5638AFC229A785C50072A21B /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638AFC129A785C50072A21B /* TopBarView.swift */; };
 		5638AFC429A786CC0072A21B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638AFC329A786CC0072A21B /* SettingsView.swift */; };
+		5638AFC629AED7C70072A21B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5638AFC529AED7C70072A21B /* GoogleService-Info.plist */; };
+		5638AFC829AEF9A30072A21B /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638AFC729AEF9A30072A21B /* Util.swift */; };
 		565C6CEA299C5DBD0026EE0E /* sitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565C6CE9299C5DBD0026EE0E /* sitApp.swift */; };
 		565C6CEC299C5DBD0026EE0E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565C6CEB299C5DBD0026EE0E /* ContentView.swift */; };
 		565C6CEE299C5DC00026EE0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 565C6CED299C5DC00026EE0E /* Assets.xcassets */; };
@@ -30,7 +32,6 @@
 		566E74E229A2CCEC0055C999 /* ShodanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74E129A2CCEC0055C999 /* ShodanView.swift */; };
 		566E74E429A2CD050055C999 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74E329A2CD050055C999 /* HistoryView.swift */; };
 		56BFE4F129A2DDFE0079216D /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */; };
-		6F7C56B929A9AF1800A32758 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F7C56B829A9AF1800A32758 /* GoogleService-Info.plist */; };
 		84FA7B56B797F883A8F67579 /* Pods_Security_Intelligence_Toolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5253E2F0D0A56D561149A /* Pods_Security_Intelligence_Toolkit.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,8 @@
 		5638AFBF29A781840072A21B /* AppVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVariables.swift; sourceTree = "<group>"; };
 		5638AFC129A785C50072A21B /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		5638AFC329A786CC0072A21B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		5638AFC529AED7C70072A21B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "sit/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5638AFC729AEF9A30072A21B /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		565C6CE6299C5DBD0026EE0E /* Security Intelligence Toolkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Security Intelligence Toolkit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		565C6CE9299C5DBD0026EE0E /* sitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sitApp.swift; sourceTree = "<group>"; };
 		565C6CEB299C5DBD0026EE0E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,8 +83,6 @@
 		566E74E129A2CCEC0055C999 /* ShodanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShodanView.swift; sourceTree = "<group>"; };
 		566E74E329A2CD050055C999 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
-		6F7C56B629A9AF1200A32758 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		6F7C56B829A9AF1800A32758 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		ECC5253E2F0D0A56D561149A /* Pods_Security_Intelligence_Toolkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Security_Intelligence_Toolkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -150,7 +151,7 @@
 		565C6CDD299C5DBD0026EE0E = {
 			isa = PBXGroup;
 			children = (
-				6F7C56B629A9AF1200A32758 /* GoogleService-Info.plist */,
+				5638AFC529AED7C70072A21B /* GoogleService-Info.plist */,
 				565C6D17299C5EF60026EE0E /* .gitignore */,
 				565C6D13299C5EC50026EE0E /* Podfile */,
 				565C6D14299C5EC50026EE0E /* README.md */,
@@ -179,9 +180,9 @@
 				566E74DA29A2CA0E0055C999 /* UI */,
 				5629AD4029A331810061A60F /* Values */,
 				56BFE4EF29A2DDE70079216D /* Models */,
-				6F7C56B829A9AF1800A32758 /* GoogleService-Info.plist */,
 				565C6CE9299C5DBD0026EE0E /* sitApp.swift */,
 				565C6CEB299C5DBD0026EE0E /* ContentView.swift */,
+				5638AFC729AEF9A30072A21B /* Util.swift */,
 				565C6CED299C5DC00026EE0E /* Assets.xcassets */,
 				565C6CEF299C5DC00026EE0E /* Preview Content */,
 			);
@@ -351,11 +352,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				565C6D18299C5EF60026EE0E /* .gitignore in Resources */,
-				6F7C56B929A9AF1800A32758 /* GoogleService-Info.plist in Resources */,
 				565C6D15299C5EC50026EE0E /* Podfile in Resources */,
 				565C6CF1299C5DC00026EE0E /* Preview Assets.xcassets in Resources */,
 				565C6D16299C5EC50026EE0E /* README.md in Resources */,
 				565C6CEE299C5DC00026EE0E /* Assets.xcassets in Resources */,
+				5638AFC629AED7C70072A21B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +426,7 @@
 				5638AFC429A786CC0072A21B /* SettingsView.swift in Sources */,
 				5638AFC029A781840072A21B /* AppVariables.swift in Sources */,
 				566E74E429A2CD050055C999 /* HistoryView.swift in Sources */,
+				5638AFC829AEF9A30072A21B /* Util.swift in Sources */,
 				566E74DC29A2CA320055C999 /* BottomBarView.swift in Sources */,
 				566E74DE29A2CC9A0055C999 /* HomeView.swift in Sources */,
 				5638AFC229A785C50072A21B /* TopBarView.swift in Sources */,
