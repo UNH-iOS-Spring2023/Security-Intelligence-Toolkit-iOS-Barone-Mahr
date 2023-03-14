@@ -42,7 +42,12 @@ struct ScanView: View {
                     )
 
                 Button(action: {
-                    // TODO: do remote scan
+                    let result = Util.doTCPCheck(host: subnetToScan, port: UInt16(80))
+                    if result {
+                        print("IT WORKED!!!")
+                    } else {
+                        print("IT DIDNT WORK!!")
+                    }
                 }, label: {
                     Text("Start Remote Scan")
                         .font(.callout)
