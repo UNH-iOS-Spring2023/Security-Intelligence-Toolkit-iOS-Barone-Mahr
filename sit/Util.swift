@@ -7,31 +7,8 @@
 
 import Foundation
 import CoreFoundation
-import Firebase
 
 struct Util {
-    static func getPreviousScans(_ uid: String) -> [ScanResult] {
-        var previousScans: [ScanResult] = []
-        
-        let db = Firestore.firestore()
-        
-        db.collection("scans")
-            .whereField("uid", isEqualTo: uid)
-            .getDocuments() { (querySnapshot, error) in
-                if let error = error {
-                    //TODO: Handle error
-                } else {
-                    for document in querySnapshot!.documents {
-                        if let scanResult = ScanResult(id: document.documentID, data: document.data()){
-                            previousScans.append(scanResult)
-                        }
-                    }
-                }
-            }
-        
-        return previousScans
-    }
-    
     static func doTCPScan(_ input: String) -> [String: Any] {
         var data: [String: Any] = [:]
         var ips: [String] = []
