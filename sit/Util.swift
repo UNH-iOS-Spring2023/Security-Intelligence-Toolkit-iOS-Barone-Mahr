@@ -7,8 +7,113 @@
 
 import Foundation
 import CoreFoundation
+import Firebase
 
 struct Util {
+    static func getPreviousScans(_ uid: String) -> [ScanResult] {
+        var previousScans: [ScanResult] = []
+        
+        let db = Firestore.firestore()
+        
+        db.collection("scans")
+            .whereField("uid", isEqualTo: uid)
+            .getDocuments() { (querySnapshot, error) in
+                if let error = error {
+                    //TODO: Handle error
+                } else {
+                    for document in querySnapshot!.documents {
+                        if let scanResult = ScanResult(id: document.documentID, data: document.data()){
+                            previousScans.append(scanResult)
+                        }
+                    }
+                }
+            }
+        
+        return previousScans
+    }
+    
+    static func doTCPScan(_ input: String) -> [String: Any] {
+        var data: [String: Any] = [:]
+        var ips: [String] = []
+        
+        if(isValidIPv4(input)) {
+            ips.append(input)
+        } else if(isValidCIDR(input)) {
+            ips = parseCIDR(input)
+        }
+        
+        data["attemptedScan"] = input
+        data["createdDate"] = Date()
+        data["localScan"] = false
+        data["networkScan"] = true
+        data["results"] = []
+        data["scanType"] = "" //Leave empty for network scans, only used for shodan
+        data["uid"] = "" //Update this before writing to firestore
+        
+        let ports: [UInt16] = [
+            20,21,22,23,24,25,26,30,32,33,37,42,43,49,53,70,79,80,443,3389,8080,8443
+        ] //Common TCP ports
+        
+        var results: [[String: Any]] = []
+        
+        for ip in ips {
+            var dict: [String: Any] = [:]
+            var result: [NSNumber] = []
+            for port in ports {
+                if(doTCPCheck(host: ip, port: port)) {
+                    result.append(NSNumber(value: port))
+                }
+            }
+            dict[ip] = result
+            results.append(dict)
+        }
+        data["results"] = results
+        
+        return data
+    }
+    
+    static func parseCIDR(_ cidr: String) -> [String] {
+        var result: [String] = []
+        if let range = cidr.range(of: "/") {
+            let addressString = cidr[cidr.startIndex..<range.lowerBound]
+            let maskString = cidr[range.upperBound...]
+            if(String(maskString) == "32") {
+                return [String(addressString)];
+            }
+            if let address = parseIPAddress(String(addressString)), let mask = UInt8(maskString) {
+                let networkAddress = applyMask(address, mask)
+                let hostCount = UInt32(pow(2.0, Double(32 - mask))) - 2 //TODO fix: Fatal error if > UInt32.max
+                for i in 0..<hostCount {
+                    let host = UInt32(bigEndian: address.bigEndian) + i + 1
+                    let ipAddress = parseHost(host.littleEndian)
+                    result.append(ipAddress)
+                }
+            }
+        }
+        return result
+    }
+    
+    static func parseHost(_ host: UInt32) -> String {
+        return String(
+            format: "%d.%d.%d.%d",
+            (host >> 24) & 0xff,
+            (host >> 16) & 0xff,
+            (host >> 8) & 0xff,
+            host & 0xff)
+    }
+    
+    static func parseIPAddress(_ ipAddress: String) -> UInt32? {
+        var addr = in_addr()
+        if ipAddress.withCString({inet_pton(AF_INET, $0, &addr)}) == 1 {
+            return UInt32(bigEndian: addr.s_addr)
+        }
+        return nil
+    }
+
+    static func applyMask(_ address: UInt32, _ mask: UInt8) -> UInt32 {
+        return address & ~(UInt32.max >> mask)
+    }
+    
     static func isValidCIDR(_ cidr: String) -> Bool {
         let components = cidr.split(separator: "/")
         let ip = String(components[0])

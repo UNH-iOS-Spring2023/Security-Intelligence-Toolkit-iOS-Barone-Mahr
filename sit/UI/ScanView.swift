@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ScanView: View {
     @EnvironmentObject var authState: AuthenticationState
     
     @State private var subnetToScan: String = ""
+    
+    @State private var errorMessage = ""
+    @State private var alertError = false
     
     var body: some View {
         ZStack {
@@ -41,14 +45,8 @@ struct ScanView: View {
                             .padding(.horizontal, 16) // match button width
                     )
 
-                Button(action: {
-                    let result = Util.doTCPCheck(host: subnetToScan, port: UInt16(80))
-                    if result {
-                        print("IT WORKED!!!")
-                    } else {
-                        print("IT DIDNT WORK!!")
-                    }
-                }, label: {
+                Button(action: doRemoteScan,
+                   label: {
                     Text("Start Remote Scan")
                         .font(.callout)
                         .bold()
@@ -80,6 +78,40 @@ struct ScanView: View {
 
                 Spacer()
             }
+            .alert(errorMessage, isPresented: $alertError){ //display an alert if anything happens during this?
+                Button("OK", role: .cancel){}
+            }
+        }
+    }
+    
+    private func doRemoteScan() {
+        if(Util.isValidIPv4(subnetToScan) || Util.isValidCIDR(subnetToScan)) {
+            self.errorMessage = "Started Scan on \(subnetToScan)."
+            self.alertError = true
+            
+            DispatchQueue.global(qos: .background).async {
+                var data: [String: Any] = Util.doTCPScan(subnetToScan)
+                
+                data["uid"] = authState.user?.uid
+                
+                let db = Firestore.firestore()
+                db.collection("scans").addDocument(data: data) { error in
+                    if let error = error {
+                        DispatchQueue.main.async {
+                            self.errorMessage = "Error saving scan results: \(error)"
+                            self.alertError = true
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.errorMessage = "Finished Scan on \(subnetToScan)."
+                            self.alertError = true
+                        }
+                    }
+                }
+            }
+        } else {
+            self.errorMessage = "Error: \(subnetToScan) is not a valid IPv4 or CIDR."
+            self.alertError = true
         }
     }
 }

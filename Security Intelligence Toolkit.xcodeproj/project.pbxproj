@@ -31,6 +31,7 @@
 		566E74E029A2CCB50055C999 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74DF29A2CCB50055C999 /* ScanView.swift */; };
 		566E74E229A2CCEC0055C999 /* ShodanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74E129A2CCEC0055C999 /* ShodanView.swift */; };
 		566E74E429A2CD050055C999 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74E329A2CD050055C999 /* HistoryView.swift */; };
+		5697AC3C29C7840200F371AF /* ScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5697AC3B29C7840200F371AF /* ScanResult.swift */; };
 		56BFE4F129A2DDFE0079216D /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */; };
 		84FA7B56B797F883A8F67579 /* Pods_Security_Intelligence_Toolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5253E2F0D0A56D561149A /* Pods_Security_Intelligence_Toolkit.framework */; };
 /* End PBXBuildFile section */
@@ -82,6 +83,7 @@
 		566E74DF29A2CCB50055C999 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
 		566E74E129A2CCEC0055C999 /* ShodanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShodanView.swift; sourceTree = "<group>"; };
 		566E74E329A2CD050055C999 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		5697AC3B29C7840200F371AF /* ScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResult.swift; sourceTree = "<group>"; };
 		56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
 		ECC5253E2F0D0A56D561149A /* Pods_Security_Intelligence_Toolkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Security_Intelligence_Toolkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -233,6 +235,7 @@
 			children = (
 				5638AFBF29A781840072A21B /* AppVariables.swift */,
 				56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */,
+				5697AC3B29C7840200F371AF /* ScanResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				5629AD3F29A2F23F0061A60F /* LoginView.swift in Sources */,
 				566E74E029A2CCB50055C999 /* ScanView.swift in Sources */,
 				5629AD4429A33B480061A60F /* SignUpView.swift in Sources */,
+				5697AC3C29C7840200F371AF /* ScanResult.swift in Sources */,
 				565C6CEC299C5DBD0026EE0E /* ContentView.swift in Sources */,
 				56BFE4F129A2DDFE0079216D /* AuthenticationState.swift in Sources */,
 				5629AD4229A331A50061A60F /* HexColors.swift in Sources */,
