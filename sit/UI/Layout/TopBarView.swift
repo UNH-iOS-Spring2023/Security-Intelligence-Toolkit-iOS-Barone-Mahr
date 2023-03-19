@@ -14,6 +14,11 @@ struct TopBarView: View {
     
     var body: some View {
         HStack {
+            Image("sit_top_bar_view")
+                .resizable()
+                .scaledToFit()
+                .frame(width:40,height:40)
+              
             Text("SIT")
                 .font(.title)
                 .fontWeight(.bold)

@@ -16,8 +16,23 @@ struct HomeView: View {
                 .ignoresSafeArea()
             
             VStack {
-                Text("Home")
+                Spacer()
+                Text("Welcome to SIT!")
                     .foregroundColor(.white)
+                    .font(.system(size:42))
+                Text("SIT enables network intelligence for everyone. It provides you with the ability to perform real-time network interrogation on your local and remote networks.")
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                Text("The discovery of systems on networks are saved to a database and can be viewed at any time by selecting the history button below." )
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                Text("Additional features include integration with Shodan, a search engine for discovering unsecured Internet of Things (IoT) devices.")
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                Spacer()
             }
         }
     }
