@@ -38,23 +38,32 @@ struct HistoryScanDetailsCardView: View {
                         VStack(alignment: .leading){
                             Text("Network Scan: \(scan.attemptedScan)")
                                 .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(CustomColors.black?.suColor)
+                            
                             Text(scan.createdTime.getFormattedDate(format: "EEEE, MMM d, yyyy h:mm a"))
                                 .font(.system(size: 16))
                                 .padding(.bottom, 8)
+                                .foregroundColor(CustomColors.black?.suColor)
                             
                             Text("Open Port Results")
                                 .font(.system(size: 18))
                                 .underline()
+                                .foregroundColor(CustomColors.black?.suColor)
                             
                             ForEach(list, id: \.0) { ip, ports in
-                                Section(header: Text("\(ip):").bold()) {
+                                Section(header: Text("\(ip):")
+                                                    .bold()
+                                                    .foregroundColor(CustomColors.black?.suColor)
+                                ){
                                     if(ports.count == 0) {
                                         Text("No open ports")
                                             .padding(.leading, 20)
+                                            .foregroundColor(CustomColors.black?.suColor)
                                     } else {
                                         ForEach(ports, id: \.self) { port in
                                             Text("• \(port)")
                                                 .padding(.leading, 20)
+                                                .foregroundColor(CustomColors.black?.suColor)
                                         }
                                     }
                                 }
