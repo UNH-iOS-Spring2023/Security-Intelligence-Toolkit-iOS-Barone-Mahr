@@ -21,7 +21,29 @@ struct HistoryView: View {
         }
         
         if(app.isShowingScanResult){
-            //TODO - BUILD OUT SCAN RESULT UNIQUE VIEW
+            //TODO: BUILD OUT SCAN RESULT UNIQUE VIEW
+            ZStack{
+                CustomColors.gray?.suColor
+                    .ignoresSafeArea()
+                
+                VStack{
+                    Text("Scan Details")
+                        .foregroundColor(.white)
+                    
+                    Button(action: {
+                        app.isShowingScanResult = false
+                    }, label: {
+                        Text("Back")
+                            .font(.callout)
+                            .bold()
+                    })
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .background(.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+                    .padding(.horizontal)
+                }
+            }
         }
         else{
             ZStack {
