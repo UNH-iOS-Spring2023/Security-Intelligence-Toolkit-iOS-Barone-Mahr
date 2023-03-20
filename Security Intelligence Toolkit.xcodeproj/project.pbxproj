@@ -34,6 +34,7 @@
 		56BFE4F129A2DDFE0079216D /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */; };
 		6F01509E29C7BAD9007CE744 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F01509D29C7BAD9007CE744 /* CardView.swift */; };
 		6FE3805429C028F000093F84 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FE3805329C028F000093F84 /* GoogleService-Info.plist */; };
+		6FFF618229C7DED000C0DAE6 /* HistoryScanCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF618129C7DED000C0DAE6 /* HistoryScanCardView.swift */; };
 		84FA7B56B797F883A8F67579 /* Pods_Security_Intelligence_Toolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5253E2F0D0A56D561149A /* Pods_Security_Intelligence_Toolkit.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,7 @@
 		56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
 		6F01509D29C7BAD9007CE744 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		6FE3805329C028F000093F84 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6FFF618129C7DED000C0DAE6 /* HistoryScanCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScanCardView.swift; sourceTree = "<group>"; };
 		ECC5253E2F0D0A56D561149A /* Pods_Security_Intelligence_Toolkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Security_Intelligence_Toolkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -229,6 +231,7 @@
 				566E74E129A2CCEC0055C999 /* ShodanView.swift */,
 				566E74E329A2CD050055C999 /* HistoryView.swift */,
 				5638AFC329A786CC0072A21B /* SettingsView.swift */,
+				6FFF618129C7DED000C0DAE6 /* HistoryScanCardView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				5629AD3F29A2F23F0061A60F /* LoginView.swift in Sources */,
 				566E74E029A2CCB50055C999 /* ScanView.swift in Sources */,
 				5629AD4429A33B480061A60F /* SignUpView.swift in Sources */,
+				6FFF618229C7DED000C0DAE6 /* HistoryScanCardView.swift in Sources */,
 				5697AC3C29C7840200F371AF /* ScanResult.swift in Sources */,
 				565C6CEC299C5DBD0026EE0E /* ContentView.swift in Sources */,
 				56BFE4F129A2DDFE0079216D /* AuthenticationState.swift in Sources */,
