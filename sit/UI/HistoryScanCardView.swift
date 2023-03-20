@@ -32,8 +32,10 @@ struct HistoryScanCardView: View {
                         VStack{
                             Text("Network Scan: \(scan.attemptedScan)")
                                 .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(CustomColors.black?.suColor)
                             Text(scan.createdTime.getFormattedDate(format: "EEEE, MMM d, yyyy h:mm a"))
                                 .font(.system(size: 16))
+                                .foregroundColor(CustomColors.black?.suColor)
                         }
                         .padding(.vertical, 25)
                         Spacer()
