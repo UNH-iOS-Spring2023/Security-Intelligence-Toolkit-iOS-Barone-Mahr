@@ -32,6 +32,7 @@
 		566E74E429A2CD050055C999 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74E329A2CD050055C999 /* HistoryView.swift */; };
 		5697AC3C29C7840200F371AF /* ScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5697AC3B29C7840200F371AF /* ScanResult.swift */; };
 		56BFE4F129A2DDFE0079216D /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */; };
+		56D0999A29C8063A005597CE /* HistoryScanDetailsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0999929C8063A005597CE /* HistoryScanDetailsCardView.swift */; };
 		6F01509E29C7BAD9007CE744 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F01509D29C7BAD9007CE744 /* CardView.swift */; };
 		6FE3805429C028F000093F84 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FE3805329C028F000093F84 /* GoogleService-Info.plist */; };
 		6FFF618229C7DED000C0DAE6 /* HistoryScanCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF618129C7DED000C0DAE6 /* HistoryScanCardView.swift */; };
@@ -86,6 +87,7 @@
 		566E74E329A2CD050055C999 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		5697AC3B29C7840200F371AF /* ScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResult.swift; sourceTree = "<group>"; };
 		56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
+		56D0999929C8063A005597CE /* HistoryScanDetailsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScanDetailsCardView.swift; sourceTree = "<group>"; };
 		6F01509D29C7BAD9007CE744 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		6FE3805329C028F000093F84 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6FFF618129C7DED000C0DAE6 /* HistoryScanCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScanCardView.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				566E74E329A2CD050055C999 /* HistoryView.swift */,
 				5638AFC329A786CC0072A21B /* SettingsView.swift */,
 				6FFF618129C7DED000C0DAE6 /* HistoryScanCardView.swift */,
+				56D0999929C8063A005597CE /* HistoryScanDetailsCardView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 			files = (
 				5638AFC429A786CC0072A21B /* SettingsView.swift in Sources */,
 				5638AFC029A781840072A21B /* AppVariables.swift in Sources */,
+				56D0999A29C8063A005597CE /* HistoryScanDetailsCardView.swift in Sources */,
 				566E74E429A2CD050055C999 /* HistoryView.swift in Sources */,
 				5638AFC829AEF9A30072A21B /* Util.swift in Sources */,
 				6F01509E29C7BAD9007CE744 /* CardView.swift in Sources */,

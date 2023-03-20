@@ -28,9 +28,21 @@ struct HistoryView: View {
                     .ignoresSafeArea()
                 
                 VStack{
-                    Text("Scan Details")
-                        .foregroundColor(.white)
+                    if(app.selectedScan!.networkScan) {
+                        Text("Network Scan: \(app.selectedScan!.attemptedScan)")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                    } else {
+                        //TODO: Shodan Query
+                    }
+                    Spacer()
                     
+                    if(app.selectedScan!.networkScan) {
+                        HistoryScanDetailsCardView(scan: app.selectedScan!)
+                    }
+                    
+                    Spacer()
                     Button(action: {
                         app.isShowingScanResult = false
                     }, label: {
@@ -43,6 +55,7 @@ struct HistoryView: View {
                     .foregroundColor(.white)
                     .cornerRadius(8)
                     .padding(.horizontal)
+                    .padding(.bottom, 16)
                 }
             }
         }
@@ -53,6 +66,8 @@ struct HistoryView: View {
                 
                 VStack {
                     Text("History")
+                        .font(.title)
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
                     list
                 }
