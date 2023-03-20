@@ -35,6 +35,7 @@ struct HistoryScanCardView: View {
                             Text(scan.createdTime.getFormattedDate(format: "EEEE, MMM d, yyyy h:mm a"))
                                 .font(.system(size: 16))
                         }
+                        .padding(.vertical, 25)
                         Spacer()
                     }
                 )

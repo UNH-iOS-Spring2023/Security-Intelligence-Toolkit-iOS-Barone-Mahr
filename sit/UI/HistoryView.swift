@@ -16,7 +16,8 @@ struct HistoryView: View {
     var body: some View {
         let list = ScrollView{
             ForEach(previousScans, id: \.self.id){
-                (scan: ScanResult) in HistoryScanCardView(scan: scan)
+                (scan: ScanResult) in
+                    HistoryScanCardView(scan: scan)
             }
         }
         
