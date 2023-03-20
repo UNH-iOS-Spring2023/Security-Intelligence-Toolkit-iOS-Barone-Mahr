@@ -1,5 +1,5 @@
 //
-//  HistoryCardView.swift
+//  CardView.swift
 //  Security Intelligence Toolkit
 //
 //  Created by Andrew Mahr on 3/19/23.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct HistoryCardView: View {
+struct CardView: View {
     @State  private var isTap: Bool = false
     
     let edgeRadius: CGFloat
@@ -60,9 +60,9 @@ struct HistoryCardView: View {
     }
 }
 
-struct HistoryCardView_Previews: PreviewProvider {
+struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryCardView(focusColor: Color(.systemBlue).opacity(0.05)){
+        CardView(focusColor: Color(.systemBlue).opacity(0.05)){
             AnyView(
                 Text("Network Scan Results")
             )
