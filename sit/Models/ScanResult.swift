@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 class ScanResult: ObservableObject {
     let id: String
@@ -20,7 +21,7 @@ class ScanResult: ObservableObject {
     
     required init?(id: String, data: [String: Any]) {
         let attemptedScan = data["attemptedScan"] as? String != nil ? data["attemptedScan"] as! String : ""
-        let createdTime = data["createdTime"] as? Date != nil ? data["createdTime"] as! Date : Date()
+        let createdTime = data["createdTime"] as? Timestamp != nil ? data["createdTime"] as! Timestamp : Timestamp()
         let localScan = data["localScan"] as? Bool != nil ? data["localScan"] as! Bool : false
         let networkScan = data["networkScan"] as? Bool != nil ? data["networkScan"] as! Bool : false
         let results = data["results"] as? [Any] != nil ? data["results"] as! [Any] : []
@@ -29,7 +30,7 @@ class ScanResult: ObservableObject {
         
         self.id = id
         self.attemptedScan = attemptedScan
-        self.createdTime = createdTime
+        self.createdTime = createdTime.dateValue()
         self.localScan = localScan
         self.networkScan = networkScan
         self.results = results

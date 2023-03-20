@@ -20,7 +20,7 @@ struct Util {
         }
         
         data["attemptedScan"] = input
-        data["createdDate"] = Date()
+        data["createdTime"] = Date()
         data["localScan"] = false
         data["networkScan"] = true
         data["results"] = []

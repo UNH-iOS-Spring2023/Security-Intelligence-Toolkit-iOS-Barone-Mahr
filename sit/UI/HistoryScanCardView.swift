@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HistoryScanCardView: View {
+    @EnvironmentObject private var app: AppVariables
     @ObservedObject var scan: ScanResult
     
     init(
@@ -43,11 +44,9 @@ struct HistoryScanCardView: View {
         )
     }
     
-    
-    
     private func clickScanItem(){
-//        app.selectedScan = scan
-//        app.isShowScanDetail = true
+        app.selectedScan = scan
+        app.isShowingScanResult = true
     }
 }
 

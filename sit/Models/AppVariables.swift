@@ -9,4 +9,6 @@ import Foundation
 
 class AppVariables: ObservableObject {
     @Published var selectedTab: Int = 0
+    @Published var isShowingScanResult: Bool = false
+    @Published var selectedScan: ScanResult? = nil
 }
