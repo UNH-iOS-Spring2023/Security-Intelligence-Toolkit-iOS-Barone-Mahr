@@ -10,26 +10,61 @@ import Firebase
 
 struct HistoryView: View {
     @EnvironmentObject var authState: AuthenticationState
-    
+    @EnvironmentObject private var app: AppVariables
     @State private var previousScans: [ScanResult] = []
     
     var body: some View {
-        ZStack {
-            CustomColors.gray?.suColor
-                .ignoresSafeArea()
-            
-            VStack {
-                Text("History")
-                    .foregroundColor(.white)
+        let list = ScrollView{
+            ForEach(previousScans, id: \.self.id){
+                (scan: ScanResult) in
+                    HistoryScanCardView(scan: scan)
             }
-        }.onAppear() {
-            getPreviousScans()
+        }
+        
+        if(app.isShowingScanResult){
+            //TODO: BUILD OUT SCAN RESULT UNIQUE VIEW
+            ZStack{
+                CustomColors.gray?.suColor
+                    .ignoresSafeArea()
+                
+                VStack{
+                    Text("Scan Details")
+                        .foregroundColor(.white)
+                    
+                    Button(action: {
+                        app.isShowingScanResult = false
+                    }, label: {
+                        Text("Back")
+                            .font(.callout)
+                            .bold()
+                    })
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .background(.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+                    .padding(.horizontal)
+                }
+            }
+        }
+        else{
+            ZStack {
+                CustomColors.gray?.suColor
+                    .ignoresSafeArea()
+                
+                VStack {
+                    Text("History")
+                        .foregroundColor(.white)
+                    list
+                }
+            }.onAppear() {
+                getPreviousScans()
+            }
         }
     }
     
     private func getPreviousScans() {
         let db = Firestore.firestore()
-        
+        self.previousScans = []
         db.collection("scans")
             .whereField("uid", isEqualTo: String(authState.user?.uid ?? ""))
             .getDocuments() { (querySnapshot, error) in
@@ -51,5 +86,6 @@ struct HistoryView: View {
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
         HistoryView()
+            .environmentObject(AppVariables())
     }
 }
