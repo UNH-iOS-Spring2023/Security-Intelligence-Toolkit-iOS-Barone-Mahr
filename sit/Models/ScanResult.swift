@@ -37,4 +37,22 @@ class ScanResult: ObservableObject {
         self.scanType = scanType
         self.uid = uid
     }
+    
+    func getNetworkScanResults() -> [(String, [String])] {
+        var list: [(String, [String])] = []
+        
+        if self.networkScan {
+            for result in self.results {
+                guard let resultDict = result as? [String: [NSNumber]] else {
+                    continue // Skip to the next iteration if the result dictionary is not in the expected format
+                }
+                for (ip, ports) in resultDict {
+                    let stringPorts = ports.map { $0.stringValue } // Convert each port in the array to a string
+                    list.append((ip, stringPorts))
+                }
+            }
+        }
+        
+        return list
+    }
 }
