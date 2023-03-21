@@ -22,6 +22,11 @@ struct SettingsView: View {
                 
                 VStack {
                     HStack {
+                        Image("sit_top_bar_view")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width:40,height:40)
+                        
                         Text("SIT")
                             .font(.title)
                             .fontWeight(.bold)
@@ -53,27 +58,51 @@ struct SettingsView: View {
                             .placeholder(when: shodanKey.isEmpty) {
                                 Text("Shodan Key").foregroundColor(.gray)
                             }
+                            .overlay(
+                                Rectangle()
+                                    .frame(height: 1)
+                                    .foregroundColor(.white)
+                                    .offset(y: 16)
+                                    .padding(.horizontal, 0)
+                            )
                         
-                        Button(action: saveShodanKey) {
+                        Button(action: saveShodanKey, label: {
                             Text("Save Settings")
-                                .foregroundColor(.white)
-                        }
+                                .font(.callout)
+                                .bold()
+                        })
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                        .background(CustomColors.pink?.suColor)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                        .padding(.horizontal)
                         
-                        Button(action: showContentView) {
+                        Button(action: showContentView, label: {
                             Text("Back")
-                                .foregroundColor(.blue)
-                        }
+                                .font(.callout)
+                                .bold()
+                        })
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                        .background(.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                        .padding(.horizontal)
+                        
                     }
                     .frame(maxWidth: geometry.size.width * 0.95)
                     
                     Spacer()
                     
-                    Button(action: doLogOut) {
+                    Button(action: doLogOut, label: {
                         Text("Logout")
                             .font(.callout)
                             .bold()
-                            .foregroundColor(.red)
-                    }
+                    })
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .background(.red)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+                    .padding(.horizontal)
                 }
             }
         }

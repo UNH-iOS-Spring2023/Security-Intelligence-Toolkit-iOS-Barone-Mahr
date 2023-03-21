@@ -17,6 +17,7 @@ struct SignUpView: View {
     @State private var passwordConf: String = ""
     @State private var isShowingPassword = false
     @State private var errorMessage = ""
+    @State private var signUpError = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -38,6 +39,13 @@ struct SignUpView: View {
                             .placeholder(when: email.isEmpty) {
                                 Text("Email").foregroundColor(.gray)
                             }
+                            .overlay(
+                                Rectangle()
+                                    .frame(height: 1)
+                                    .foregroundColor(.white)
+                                    .offset(y: 16)
+                                    .padding(.horizontal, 0)
+                            )
                         
                         if isShowingPassword {
                             TextField("", text: $password)
@@ -47,12 +55,26 @@ struct SignUpView: View {
                                 .placeholder(when: password.isEmpty) {
                                     Text("Password").foregroundColor(.gray)
                                 }
+                                .overlay(
+                                    Rectangle()
+                                        .frame(height: 1)
+                                        .foregroundColor(.white)
+                                        .offset(y: 16)
+                                        .padding(.horizontal, 0)
+                                )
                         } else {
                             SecureField("", text: $password)
                                 .foregroundColor(.white)
                                 .placeholder(when: password.isEmpty) {
                                     Text("Password").foregroundColor(.gray)
                                 }
+                                .overlay(
+                                    Rectangle()
+                                        .frame(height: 1)
+                                        .foregroundColor(.white)
+                                        .offset(y: 16)
+                                        .padding(.horizontal, 0)
+                                )
                         }
                         
                         if isShowingPassword {
@@ -63,31 +85,59 @@ struct SignUpView: View {
                                 .placeholder(when: passwordConf.isEmpty) {
                                     Text("Password Confirmation").foregroundColor(.gray)
                                 }
+                                .overlay(
+                                    Rectangle()
+                                        .frame(height: 1)
+                                        .foregroundColor(.white)
+                                        .offset(y: 16)
+                                        .padding(.horizontal, 0)
+                                )
                         } else {
                             SecureField("", text: $passwordConf)
                                 .foregroundColor(.white)
                                 .placeholder(when: passwordConf.isEmpty) {
                                     Text("Password Confirmation").foregroundColor(.gray)
                                 }
+                                .overlay(
+                                    Rectangle()
+                                        .frame(height: 1)
+                                        .foregroundColor(.white)
+                                        .offset(y: 16)
+                                        .padding(.horizontal, 0)
+                                )
                         }
                         
                         Toggle("Show password", isOn: $isShowingPassword)
                             .foregroundColor(.white)
                         
-                        Button(action: doSignUp) {
+                        Button(action: doSignUp, label: {
                             Text("Sign Up")
                                 .font(.callout)
-                                .foregroundColor(.white)
-                        }
+                                .bold()
+                        })
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                        .background(CustomColors.pink?.suColor)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                        .padding(.horizontal)
                         .disabled(email.count == 0 && password.count == 0)
                         
-                        Button(action: showLoginView) {
+                        
+                        Button(action: showLoginView, label: {
                             Text("Back")
                                 .font(.callout)
-                                .foregroundColor(.white)
-                        }
+                                .bold()
+                        })
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                        .background(.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                        .padding(.horizontal)
                     }
                     .frame(maxWidth: geometry.size.width * 0.95)
+                    .alert(errorMessage, isPresented: $signUpError){
+                        Button("OK", role: .cancel){}
+                    }
                 }
             }
         }
@@ -104,9 +154,11 @@ struct SignUpView: View {
                         showLoginView() //if you don't call this here after a log out they'll be brought to signup again instead of login
                     } else {
                         self.errorMessage = "Sign Up Failure."
+                        self.signUpError = true
                     }
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
+                    self.signUpError = true
             }
         }
     }
