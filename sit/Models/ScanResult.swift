@@ -56,3 +56,10 @@ class ScanResult: ObservableObject {
         return list
     }
 }
+
+/* Code to make the scan result items equatable to be able to mess with indexes and deletion
+ Equatable {
+     static func == (lhs: ScanResult, rhs: ScanResult) -> Bool {
+         return lhs.id == rhs.id
+     }
+ */

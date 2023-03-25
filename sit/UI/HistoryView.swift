@@ -17,7 +17,12 @@ struct HistoryView: View {
         let list = ScrollView{
             ForEach(previousScans, id: \.self.id){
                 (scan: ScanResult) in
-                    HistoryScanCardView(scan: scan)
+                HistoryScanCardView(scan: scan)
+                    .contextMenu { //This section creates a delete button for the card on long press
+                        Button(action: deleteScan) {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
             }
         }
         
@@ -57,7 +62,10 @@ struct HistoryView: View {
                     .padding(.horizontal)
                     .padding(.bottom, 16)
                 }
+                .background(CustomColors.gray?.suColor)
             }
+            .background(CustomColors.gray?.suColor)
+            
         }
         else{
             ZStack {
@@ -70,10 +78,14 @@ struct HistoryView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                     list
+                        .background(CustomColors.gray?.suColor)
+                        
+                    Spacer()
                 }
             }.onAppear() {
                 getPreviousScans()
             }
+            .background(CustomColors.gray?.suColor)
         }
     }
     
@@ -96,6 +108,9 @@ struct HistoryView: View {
                 }
             }
     }
+    private func deleteScan(){
+        // NEED TO FINISH FUNCTION TO MAKE DELETION WORK
+    }
 }
 
 struct HistoryView_Previews: PreviewProvider {
@@ -104,3 +119,41 @@ struct HistoryView_Previews: PreviewProvider {
             .environmentObject(AppVariables())
     }
 }
+
+/* Code to attempt swipe to delete - need to investigate more
+ 
+ var body: some View {
+     let list = List{
+     ForEach(previousScans, id: \.self.id){
+         (scan: ScanResult) in
+         HistoryScanCardView(scan: scan)
+            .contextMenu {
+                 Button(action: {
+                      Delete the scan result from the previousScans array
+                     if let index = previousScans.firstIndex(of: scan) {
+                         previousScans.remove(at: index)
+                     }
+                      Delete the scan result from the database
+                     let db = Firestore.firestore()
+                     db.collection("scans").document(scan.id).delete()
+                 }) {
+                     Label("Delete", systemImage: "trash")
+                 }
+             }
+         }
+         .onDelete { indexSet in
+             indexSet.forEach { index in
+                  Delete the scan result from the previousScans array
+                 let scan = previousScans[index]
+                 if let index = previousScans.firstIndex(of: scan) {
+                     previousScans.remove(at: index)
+                 }
+                  Delete the scan result from the database
+                 let db = Firestore.firestore()
+                 db.collection("scans").document(scan.id).delete()
+             }
+         }
+     }
+ 
+ }
+ */

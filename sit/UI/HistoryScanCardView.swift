@@ -40,6 +40,7 @@ struct HistoryScanCardView: View {
                         .padding(.vertical, 25)
                         Spacer()
                     }
+//                    .background(CustomColors.black?.suColor)
                 )
 
                 
