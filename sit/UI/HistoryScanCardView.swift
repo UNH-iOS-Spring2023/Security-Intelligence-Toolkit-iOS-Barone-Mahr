@@ -4,6 +4,7 @@
 //
 //  Created by Andrew Mahr on 3/19/23.
 //
+/// This file contains the code used to define what the HistoryScan Card looks like. It builds off the CardView base code to make it unique.
 
 import SwiftUI
 
@@ -47,6 +48,7 @@ struct HistoryScanCardView: View {
         )
     }
     
+    /// Defines what happens when a History Card is clicked on
     private func clickScanItem(){
         app.selectedScan = scan
         app.isShowingScanResult = true
