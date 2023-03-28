@@ -47,6 +47,7 @@ struct CustomColors {
     static let black = UIColor(hex: "#000000FF")
     static let gray = UIColor(hex: "#252525FF")
     static let white = UIColor(hex: "#FFFFFFFF")
+    static let red = UIColor(hex: "#FF000000")
     
 }
 
