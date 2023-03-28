@@ -56,3 +56,4 @@ class ScanResult: ObservableObject {
         return list
     }
 }
+
