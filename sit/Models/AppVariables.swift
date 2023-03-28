@@ -4,7 +4,7 @@
 //
 //  Created by Charles Barone on 2/23/23.
 //
-
+/// This file defines the variables that are used globally across the application.
 import Foundation
 
 class AppVariables: ObservableObject {
