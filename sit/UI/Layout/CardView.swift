@@ -5,6 +5,8 @@
 //  Created by Andrew Mahr on 3/19/23.
 //  Structure and Card implementation taken from Prof. Pelicano's PianiFit Demo
 //
+/// This file contains the code needed to define the design and architecture of the Cards used to display the list of scan results
+/// a user has initiated.
 
 import SwiftUI
 

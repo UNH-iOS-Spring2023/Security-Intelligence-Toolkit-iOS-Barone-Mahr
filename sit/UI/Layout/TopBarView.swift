@@ -4,6 +4,7 @@
 //
 //  Created by Charles Barone on 2/23/23.
 //
+/// This file contains the code that defines the TopBar design and architecture.
 
 import SwiftUI
 

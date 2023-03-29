@@ -4,6 +4,7 @@
 //
 //  Created by Charles Barone on 3/19/23.
 //
+/// This file contains the code which defines the architecture and design used to present the individual scan results associated with a Card. It presents the IP address that was scanned, and the date the scan was initiated.
 
 import SwiftUI
 

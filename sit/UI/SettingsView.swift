@@ -4,6 +4,7 @@
 //
 //  Created by Charles Barone on 2/23/23.
 //
+/// This file defines the design and architecture of the Settings screen which provides users the opportunity to upload their Shodan Key or logout of the app.
 
 import SwiftUI
 
@@ -108,10 +109,13 @@ struct SettingsView: View {
         }
     }
     
+    
+    ///This function will save the users Shodan Key to the database
     private func saveShodanKey() {
         // TODO: Write code here to save shodan key to firestore
     }
     
+    ///This function handles logging out the user and resetting the app to the home screen after relogin
     private func doLogOut() {
         showContentView() //Required so that they return to the home screen after logging back in.
         authState.logout()

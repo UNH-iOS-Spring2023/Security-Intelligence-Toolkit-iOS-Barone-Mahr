@@ -4,6 +4,7 @@
 //
 //  Created by Charles Barone on 2/19/23.
 //
+/// This file defines the design and architecture of the overarching page used to display a user's history of scan results.
 
 import SwiftUI
 import Firebase
@@ -89,6 +90,7 @@ struct HistoryView: View {
         }
     }
     
+    ///This function retrieves the saved scans from the database
     private func getPreviousScans() {
         let db = Firestore.firestore()
         self.previousScans = []
@@ -108,6 +110,8 @@ struct HistoryView: View {
                 }
             }
     }
+    
+    ///This function deletes the user specified from the database and array of results displayed on the screen
     private func deleteScan(){
         // NEED TO FINISH FUNCTION TO MAKE DELETION WORK
     }

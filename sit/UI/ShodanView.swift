@@ -4,6 +4,7 @@
 //
 //  Created by Charles Barone on 2/19/23.
 //
+/// This file defines the structure and design of the page used to initiate Shodan Scans.
 
 import SwiftUI
 

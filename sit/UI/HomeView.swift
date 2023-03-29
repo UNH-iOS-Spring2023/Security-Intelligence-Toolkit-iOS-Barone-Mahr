@@ -4,6 +4,7 @@
 //
 //  Created by Charles Barone on 2/19/23.
 //
+/// This page defines the home screen users see when the login to the application. It provides a brief overview of the application and its capabilities.
 
 import SwiftUI
 

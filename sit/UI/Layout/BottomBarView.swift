@@ -4,6 +4,7 @@
 //
 //  Created by Charles Barone on 2/19/23.
 //
+/// This file defines the layout of the Bottom Bar screen and defines the look and options for Home, Scan, Shodan, and History.
 
 import SwiftUI
 
