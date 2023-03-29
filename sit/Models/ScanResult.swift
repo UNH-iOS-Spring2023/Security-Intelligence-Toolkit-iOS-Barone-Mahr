@@ -38,6 +38,9 @@ class ScanResult: ObservableObject {
         self.uid = uid
     }
     
+    /// Returns an array containing network scan results, where the first element in each is an IP address and the second element is an array of strings representing open ports.
+    ///
+    /// - Returns: An array containing network scan results.
     func getNetworkScanResults() -> [(String, [String])] {
         var list: [(String, [String])] = []
         

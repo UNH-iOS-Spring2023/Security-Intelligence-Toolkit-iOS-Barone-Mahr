@@ -9,6 +9,12 @@ import Foundation
 import CoreFoundation
 
 struct Util {
+    /// Performs a network TCP port scan on an IPv4 address or CIDR subnet range
+    ///
+    /// - Parameters:
+    ///   - input: String containing an IPv4 address or CIDR
+    ///
+    /// - Returns: Results of the network TCP scan (which ports were found to be open)
     static func doTCPScan(_ input: String) -> [String: Any] {
         var data: [String: Any] = [:]
         var ips: [String] = []
@@ -49,6 +55,12 @@ struct Util {
         return data
     }
     
+    /// Converts a CIDR notation to an array of IPv4 addresses
+    ///
+    /// - Parameters:
+    ///   - cidr: String containing a CIDR notation
+    ///
+    /// - Returns: An array of IPv4 addresses
     static func parseCIDR(_ cidr: String) -> [String] {
         var result: [String] = []
         if let range = cidr.range(of: "/") {
@@ -70,6 +82,12 @@ struct Util {
         return result
     }
     
+    /// Converts an IPv4 Address in an unsigned 32-bit integer representation to a string in dot-decimal notation
+    ///
+    /// - Parameters:
+    ///   - host: The numerical host address to convert
+    ///
+    /// - Returns: A string containing an IPv4 address in dot-decimal notation
     static func parseHost(_ host: UInt32) -> String {
         return String(
             format: "%d.%d.%d.%d",
@@ -79,6 +97,12 @@ struct Util {
             host & 0xff)
     }
     
+    /// Converts an IPv4 address in string format to an unsigned 32-bit integer representation
+    ///
+    /// - Parameters:
+    ///  - ipAddress: String containing an IPv4 address in dot-decimal notation
+    ///
+    /// - Returns: An optional UInt32 representing the IPv4 address, or nil if the conversion failed
     static func parseIPAddress(_ ipAddress: String) -> UInt32? {
         var addr = in_addr()
         if ipAddress.withCString({inet_pton(AF_INET, $0, &addr)}) == 1 {
@@ -87,10 +111,23 @@ struct Util {
         return nil
     }
 
+    /// Applies a subnet mask to an IPv4 address represented as an unsigned 32-bit integer
+    ///
+    /// - Parameters:
+    ///  - address: An unsigned 32-bit integer representing an IPv4 address
+    ///  - mask: An unsigned 8-bit integer representing the subnet mask
+    ///
+    /// - Returns: An unsigned 32-bit integer representing the network address obtained by applying the subnet mask to the given address
     static func applyMask(_ address: UInt32, _ mask: UInt8) -> UInt32 {
         return address & ~(UInt32.max >> mask)
     }
     
+    /// Determines whether a string containing a CIDR notation is valid
+    ///
+    /// - Parameters:
+    ///  - cidr: String containing a CIDR notation
+    ///
+    /// - Returns: A boolean indicating whether the CIDR notation is valid, by checking whether the IP address and subnet mask are valid, and whether the subnet mask is within the range of 0-32.
     static func isValidCIDR(_ cidr: String) -> Bool {
         let components = cidr.split(separator: "/")
         let ip = String(components[0])
@@ -106,6 +143,12 @@ struct Util {
         return true
     }
     
+    /// Determines whether a string containing an IPv4 address in dot-decimal notation is valid
+    ///
+    /// - Parameters:
+    ///  - ip: String containing an IPv4 address in dot-decimal notation
+    ///
+    /// - Returns: A boolean indicating whether the IPv4 address is valid, by checking whether it has four parts separated by dots, and whether each part is within the range of 0-255.
     static func isValidIPv4(_ ip: String) -> Bool {
         let parts = ip.split(separator: ".")
         guard parts.count == 4 else { return false }
@@ -116,6 +159,13 @@ struct Util {
         return true
     }
     
+    /// Performs a TCP connection check to a specified host and port
+    ///
+    /// - Parameters:
+    ///  - host: String containing an IPv4 address in dot-decimal notation
+    ///  - port: An unsigned 16-bit integer representing the TCP port number to connect to
+    ///
+    /// - Returns: A boolean indicating whether the TCP connection check succeeded, by attempting to create a socket and connect to the specified host and port with a timeout of 1 second. If the connection is successful, returns true, otherwise returns false.
     static func doTCPCheck(host: String, port: UInt16) -> Bool {
         let socket = CFSocketCreate(kCFAllocatorDefault, PF_INET, SOCK_STREAM, IPPROTO_TCP, 0, nil, nil)
         var address = sockaddr_in()
@@ -149,7 +199,13 @@ struct Util {
 
 // https://stackoverflow.com/questions/35700281/date-format-in-swift
 extension Date {
-   func getFormattedDate(format: String) -> String {
+    /// Returns the formatted string representation of a date object
+    ///
+    /// - Parameters:
+    ///  - format: A string representing the desired format of the date, using the format syntax of the DateFormatter class
+    ///
+    /// - Returns: A string containing the formatted representation of the date object, based on the specified format string.
+    func getFormattedDate(format: String) -> String {
         let dateformat = DateFormatter()
         dateformat.dateFormat = format
         return dateformat.string(from: self)

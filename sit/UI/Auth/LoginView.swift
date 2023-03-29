@@ -126,6 +126,13 @@ struct LoginView: View {
         }
     }
     
+    /// Perform login with given email and password.
+    ///
+    /// - Parameters:
+    ///  - email: The email to use for login.
+    ///  - password: The password to use for login.
+    ///
+    ///  - Returns: None. Updates authState.
     private func doLogin() {
         authState.login(email: email, password: password) { result in
             authState.isLoggingIn = false

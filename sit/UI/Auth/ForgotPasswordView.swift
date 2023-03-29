@@ -76,6 +76,10 @@ struct ForgotPasswordView: View {
         }
     }
     
+    /// Sends a request to reset the password for the user's account associated with the provided email.
+    ///
+    /// - Parameters:
+    ///  - email: The email address associated with the user's account.
     private func doForgotPassword() {
         authState.forgotPassword(email: email){ result in
             switch result {
