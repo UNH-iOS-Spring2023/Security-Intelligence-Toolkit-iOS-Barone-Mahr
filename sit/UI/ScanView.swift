@@ -4,7 +4,7 @@
 //
 //  Created by Charles Barone on 2/19/23.
 //
-/// This file handles the Scan Page of the Application
+/// This file handles the Scan Page of the Application. Here you can do remote or local scans.
 
 import SwiftUI
 import Firebase
