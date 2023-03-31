@@ -4,9 +4,11 @@
 //
 //  Created by Charles Barone on 2/19/23.
 //
+/// This file handles the Scan Page of the Application
 
 import SwiftUI
 import Firebase
+import UserNotifications
 
 struct ScanView: View {
     @EnvironmentObject var authState: AuthenticationState
@@ -84,6 +86,7 @@ struct ScanView: View {
         }
     }
     
+    ///This function conducts the remote scan based on the user input. 
     private func doRemoteScan() {
         if(Util.isValidIPv4(subnetToScan) || Util.isValidCIDR(subnetToScan)) {
             self.errorMessage = "Started Scan on \(subnetToScan)."
@@ -101,11 +104,13 @@ struct ScanView: View {
                             self.errorMessage = "Error saving scan results: \(error)"
                             self.alertError = true
                         }
+                        sendNotification(title: "Network Scan Failed", body: "Error saving scan results: \(error)")
                     } else {
                         DispatchQueue.main.async {
                             self.errorMessage = "Finished Scan on \(subnetToScan)."
                             self.alertError = true
                         }
+                        sendNotification(title: "Network Scan Completed", body: "Network scan completed successfully.")
                     }
                 }
             }
@@ -113,6 +118,25 @@ struct ScanView: View {
             self.errorMessage = "Error: \(subnetToScan) is not a valid IPv4 or CIDR."
             self.alertError = true
         }
+    }
+    
+    
+    ///Function to send a notification to the user about the scan status
+    /// - PARAMETERS:
+    ///    - title : string containing the title of the notification
+    ///    - body : string containing the body of the notification
+    private func sendNotification(title: String, body: String){
+        let notification = UNMutableNotificationContent()
+        notification.title = title
+        notification.body = body
+        let request = UNNotificationRequest(identifier: "networkScanNotification", content: notification, trigger: nil)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+            if let error = error {
+                print("Error sending notification: \(error.localizedDescription)")
+            } else{
+                print("Notification Sent.")
+            }
+        })
     }
 }
 
