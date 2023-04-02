@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreFoundation
+import FirebaseFirestore
 
 struct Util {
     /// Performs a network TCP port scan on an IPv4 address or CIDR subnet range
@@ -195,7 +196,7 @@ struct Util {
         }
     }
     
-    static func doShodanQuery(apiKey: String, scanType: ShodanScanType) {
+    static func doShodanQuery(apiKey: String, scanType: ShodanScanType, uid: String, input: String) {
         let api = ShodanAPI(apiKey: apiKey)
         
         let dispatchGroup = DispatchGroup()
@@ -234,7 +235,7 @@ struct Util {
                     dispatchGroup.leave()
                 }
             case .SHODAN_SEARCH_IP:
-                api.getHostInformation(ipAddress: "8.8.8.8") { result in
+                api.getHostInformation(ipAddress: input) { result in
                     switch result {
                     case .success(let hostInfo):
                         returnData = hostInfo
@@ -245,7 +246,7 @@ struct Util {
                     dispatchGroup.leave()
                 }
             case .SHODAN_FILTER_SEARCH:
-                api.search(query: "webcam") { result in
+                api.search(query: input) { result in
                     switch result {
                     case .success(let searchResults):
                         returnData = searchResults
@@ -263,8 +264,56 @@ struct Util {
         dispatchGroup.notify(queue: .main) {
             if apiConnectionSuccessful, let returnData = returnData {
                 print("Shodan Return Data: \(returnData)")
+                saveShodanQuery(queryData: returnData, scanType: scanType, uid: uid, input: input)
             } else {
                 print(errorData!)
+            }
+        }
+    }
+    
+    static func saveShodanQuery(queryData: Any, scanType: ShodanScanType, uid: String, input: String) {
+        var data: [String: Any] = [:]
+        
+        data["attemptedScan"] = ""
+        data["createdTime"] = Date()
+        data["localScan"] = false
+        data["networkScan"] = false
+        data["results"] = []
+        
+        switch scanType {
+        case .SHODAN_PUBLIC_IP:
+            data["scanType"] = "SHODAN_PUBLIC_IP"
+            data["attemptedScan"] = (queryData as? String)?.dropFirst().dropLast() // Shodan ouput puts IP in "s, this removes them.
+        case .SHODAN_SEARCH_IP:
+            data["scanType"] = "SHODAN_SEARCH_IP"
+            data["attemptedScan"] = input
+        case .SHODAN_FILTER_SEARCH:
+            data["scanType"] = "SHODAN_FILTER_SEARCH"
+            data["attemptedScan"] = input
+        }
+        
+        data["uid"] = uid
+        
+        var results: [[String: Any]] = []
+        
+        if(scanType == .SHODAN_PUBLIC_IP) {
+            var dict: [String: Any] = [:]
+            var result: [String] = []
+            dict["SHODAN_PUBLIC_SCAN"] = result
+            results.append(dict)
+        } else {
+            
+        }
+        
+        
+        data["results"] = results
+        
+        let db = Firestore.firestore()
+        db.collection("scans").addDocument(data: data) { error in
+            if let error = error {
+                
+            } else {
+                
             }
         }
     }
