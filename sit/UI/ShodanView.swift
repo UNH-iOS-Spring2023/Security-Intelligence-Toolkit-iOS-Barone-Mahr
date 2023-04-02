@@ -21,7 +21,7 @@ struct ShodanView: View {
             
             VStack {
                 Button(action: {
-                    doShodan(scanType: .SHODAN_PUBLIC_IP)
+                    doShodan(scanType: .SHODAN_SEARCH_IP, input: "8.8.8.8")
                 }, label: {
                     Text("Test Shodan")
                         .font(.callout)
@@ -36,7 +36,7 @@ struct ShodanView: View {
         }
     }
     
-    private func doShodan(scanType: ShodanScanType) {
+    private func doShodan(scanType: ShodanScanType, input: String) {
         guard let userId = authState.user?.uid else { return }
         
         let db = Firestore.firestore()
@@ -49,7 +49,7 @@ struct ShodanView: View {
             }
             
             if let shodanKeyValue = document.data()?["shodanKey"] as? String {
-                Util.doShodanQuery(apiKey: shodanKeyValue, scanType: scanType, uid: userId, input: "")
+                Util.doShodanQuery(apiKey: shodanKeyValue, scanType: scanType, uid: userId, input: input)
             }
         }
     }

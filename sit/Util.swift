@@ -279,14 +279,29 @@ struct Util {
         data["localScan"] = false
         data["networkScan"] = false
         data["results"] = []
+        var results: [[String: Any]] = []
+        var dict: [String: Any] = [:]
         
         switch scanType {
         case .SHODAN_PUBLIC_IP:
             data["scanType"] = "SHODAN_PUBLIC_IP"
             data["attemptedScan"] = (queryData as? String)?.dropFirst().dropLast() // Shodan ouput puts IP in "s, this removes them.
+            var result: [String] = []
+            dict["SHODAN_PUBLIC_SCAN"] = result
+            results.append(dict)
         case .SHODAN_SEARCH_IP:
             data["scanType"] = "SHODAN_SEARCH_IP"
-            data["attemptedScan"] = input
+            
+            let queryDict = queryData as! [String: Any]
+            
+            var result: [NSNumber] = []
+            result = queryDict["ports"] as! [NSNumber]
+            dict[input] = result
+            results.append(dict)
+            
+            data["attemptedScan"] = "\(queryDict["org"] ?? "Org Unknown"), \(queryDict["city"] ?? "City Unknown"), \(queryDict["region_code"] ?? "Region Unknown"), \(queryDict["country_code"] ?? "Country Unknown")"
+            
+            
         case .SHODAN_FILTER_SEARCH:
             data["scanType"] = "SHODAN_FILTER_SEARCH"
             data["attemptedScan"] = input
@@ -294,13 +309,9 @@ struct Util {
         
         data["uid"] = uid
         
-        var results: [[String: Any]] = []
         
         if(scanType == .SHODAN_PUBLIC_IP) {
-            var dict: [String: Any] = [:]
-            var result: [String] = []
-            dict["SHODAN_PUBLIC_SCAN"] = result
-            results.append(dict)
+            
         } else {
             
         }
