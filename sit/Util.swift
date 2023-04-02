@@ -195,6 +195,85 @@ struct Util {
         }
     }
     
+    static func doShodanQuery(apiKey: String, scanType: ShodanScanType) {
+        let api = ShodanAPI(apiKey: apiKey)
+        
+        let dispatchGroup = DispatchGroup()
+        var apiConnectionSuccessful = false
+        var returnData: Any?
+        var errorData: String?
+        
+        dispatchGroup.enter()
+        api.testAPIConnection { result in
+            switch result {
+            case .success(let isConnected):
+                if isConnected {
+                    apiConnectionSuccessful = true
+                } else {
+                    errorData = "ERROR: API connection failed, verify API Key!"
+                }
+            case .failure(let error):
+                errorData = "ERROR: \(error.localizedDescription)"
+            }
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        
+        if(apiConnectionSuccessful) {
+            switch scanType {
+            case .SHODAN_PUBLIC_IP:
+                api.getPublicIPAddress { result in
+                    switch result {
+                    case .success(let publicIP):
+                        returnData = publicIP
+                    case .failure(let error):
+                        errorData = "ERROR: \(error.localizedDescription)"
+                        apiConnectionSuccessful = false
+                    }
+                    dispatchGroup.leave()
+                }
+            case .SHODAN_SEARCH_IP:
+                api.getHostInformation(ipAddress: "8.8.8.8") { result in
+                    switch result {
+                    case .success(let hostInfo):
+                        returnData = hostInfo
+                    case .failure(let error):
+                        errorData = "ERROR: \(error.localizedDescription)"
+                        apiConnectionSuccessful = false
+                    }
+                    dispatchGroup.leave()
+                }
+            case .SHODAN_FILTER_SEARCH:
+                api.search(query: "webcam") { result in
+                    switch result {
+                    case .success(let searchResults):
+                        returnData = searchResults
+                    case .failure(let error):
+                        errorData = "ERROR: \(error.localizedDescription)"
+                        apiConnectionSuccessful = false
+                    }
+                    dispatchGroup.leave()
+                }
+            }
+        } else {
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            if apiConnectionSuccessful, let returnData = returnData {
+                print("Shodan Return Data: \(returnData)")
+            } else {
+                print(errorData!)
+            }
+        }
+    }
+}
+
+enum ShodanScanType {
+    case SHODAN_PUBLIC_IP
+    case SHODAN_FILTER_SEARCH
+    case SHODAN_SEARCH_IP
 }
 
 // https://stackoverflow.com/questions/35700281/date-format-in-swift
