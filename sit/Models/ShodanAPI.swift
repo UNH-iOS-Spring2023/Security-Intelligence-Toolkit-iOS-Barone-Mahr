@@ -7,9 +7,13 @@
 
 import Foundation
 
-struct ShodanAPI {
-    let apiKey = ""
+class ShodanAPI {
+    let apiKey: String
     let baseURL = "https://api.shodan.io"
+    
+    required init(apiKey: String) {
+        self.apiKey = apiKey
+    }
     
     func get(path: String, completion: @escaping (Result<Data, Error>) -> Void) {
         let urlString = baseURL + path + "key=" + apiKey
