@@ -9,6 +9,12 @@
 import SwiftUI
 import Firebase
 
+enum ShodanScanType {
+    case SHODAN_PUBLIC_IP
+    case SHODAN_FILTER_SEARCH
+    case SHODAN_SEARCH_IP
+}
+
 struct ShodanView: View {
     @EnvironmentObject var authState: AuthenticationState
     
@@ -19,7 +25,7 @@ struct ShodanView: View {
             
             VStack {
                 Button(action: {
-                    doShodan()
+                    doShodan(scanType: .SHODAN_PUBLIC_IP)
                 }, label: {
                     Text("Test Shodan")
                         .font(.callout)
@@ -34,7 +40,7 @@ struct ShodanView: View {
         }
     }
     
-    private func doShodan() {
+    private func doShodan(scanType: ShodanScanType) {
         guard let userId = authState.user?.uid else { return }
         
         let db = Firestore.firestore()
@@ -51,7 +57,7 @@ struct ShodanView: View {
                 
                 let dispatchGroup = DispatchGroup()
                 var apiConnectionSuccessful = false
-                var publicIPAddress: String?
+                var returnData: Any?
                 var errorMessage: String?
                 
                 dispatchGroup.enter()
@@ -70,48 +76,54 @@ struct ShodanView: View {
                 }
                 
                 dispatchGroup.enter()
+                
                 if(apiConnectionSuccessful) {
-                    api.getPublicIPAddress { result in
-                        switch result {
-                        case .success(let publicIP):
-                            publicIPAddress = publicIP
-                        case .failure(let error):
-                            errorMessage = "ERROR: \(error.localizedDescription)"
-                            apiConnectionSuccessful = false
+                    switch scanType {
+                    case .SHODAN_PUBLIC_IP:
+                        api.getPublicIPAddress { result in
+                            switch result {
+                            case .success(let publicIP):
+                                returnData = publicIP
+                            case .failure(let error):
+                                errorMessage = "ERROR: \(error.localizedDescription)"
+                                apiConnectionSuccessful = false
+                            }
+                            dispatchGroup.leave()
                         }
-                        dispatchGroup.leave()
+                    case .SHODAN_SEARCH_IP:
+                        api.getHostInformation(ipAddress: "8.8.8.8") { result in
+                            switch result {
+                            case .success(let hostInfo):
+                                returnData = hostInfo
+                            case .failure(let error):
+                                errorMessage = "ERROR: \(error.localizedDescription)"
+                                apiConnectionSuccessful = false
+                            }
+                            dispatchGroup.leave()
+                        }
+                    case .SHODAN_FILTER_SEARCH:
+                        api.search(query: "webcam") { result in
+                            switch result {
+                            case .success(let searchResults):
+                                returnData = searchResults
+                            case .failure(let error):
+                                errorMessage = "ERROR: \(error.localizedDescription)"
+                                apiConnectionSuccessful = false
+                            }
+                            dispatchGroup.leave()
+                        }
                     }
                 } else {
                     dispatchGroup.leave()
                 }
                 
                 dispatchGroup.notify(queue: .main) {
-                    if apiConnectionSuccessful, let publicIPAddress = publicIPAddress {
-                        print("API connection successful, your public IP address is: \(publicIPAddress)")
+                    if apiConnectionSuccessful, let returnData = returnData {
+                        print("Shodan Return Data: \(returnData)")
                     } else {
                         print(errorMessage!)
                     }
                 }
-
-                /* api.getHostInformation(ipAddress: "8.8.8.8") { result in
-                    switch result {
-                    case .success(let hostInfo):
-                        print("Host information for 8.8.8.8: \(hostInfo)")
-                    case .failure(let error):
-                        print("Error: \(error.localizedDescription)")
-                    }
-                } */
-                
-                
-                
-                /* api.search(query: "webcam") { result in
-                    switch result {
-                    case .success(let searchResults):
-                        print("Search results: \(searchResults)")
-                    case .failure(let error):
-                        print("Error: \(error.localizedDescription)")
-                    }
-                } */
             }
         }
     }
