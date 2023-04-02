@@ -10,6 +10,7 @@
 		5629AD3F29A2F23F0061A60F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629AD3E29A2F23F0061A60F /* LoginView.swift */; };
 		5629AD4229A331A50061A60F /* HexColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629AD4129A331A50061A60F /* HexColors.swift */; };
 		5629AD4429A33B480061A60F /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629AD4329A33B480061A60F /* SignUpView.swift */; };
+		5634F41A29D94DAF00907F0A /* ShodanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5634F41929D94DAF00907F0A /* ShodanAPI.swift */; };
 		5638AFBD29A778370072A21B /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638AFBC29A778370072A21B /* ForgotPasswordView.swift */; };
 		5638AFC029A781840072A21B /* AppVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638AFBF29A781840072A21B /* AppVariables.swift */; };
 		5638AFC229A785C50072A21B /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638AFC129A785C50072A21B /* TopBarView.swift */; };
@@ -62,6 +63,7 @@
 		5629AD3E29A2F23F0061A60F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		5629AD4129A331A50061A60F /* HexColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColors.swift; sourceTree = "<group>"; };
 		5629AD4329A33B480061A60F /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		5634F41929D94DAF00907F0A /* ShodanAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShodanAPI.swift; sourceTree = "<group>"; };
 		5638AFBC29A778370072A21B /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		5638AFBF29A781840072A21B /* AppVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVariables.swift; sourceTree = "<group>"; };
 		5638AFC129A785C50072A21B /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				5638AFBF29A781840072A21B /* AppVariables.swift */,
 				56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */,
 				5697AC3B29C7840200F371AF /* ScanResult.swift */,
+				5634F41929D94DAF00907F0A /* ShodanAPI.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				566E74E029A2CCB50055C999 /* ScanView.swift in Sources */,
 				5629AD4429A33B480061A60F /* SignUpView.swift in Sources */,
 				6FFF618229C7DED000C0DAE6 /* HistoryScanCardView.swift in Sources */,
+				5634F41A29D94DAF00907F0A /* ShodanAPI.swift in Sources */,
 				5697AC3C29C7840200F371AF /* ScanResult.swift in Sources */,
 				565C6CEC299C5DBD0026EE0E /* ContentView.swift in Sources */,
 				56BFE4F129A2DDFE0079216D /* AuthenticationState.swift in Sources */,
