@@ -18,12 +18,22 @@ struct HistoryView: View {
         let list = ScrollView{
             ForEach(previousScans, id: \.self.id){
                 (scan: ScanResult) in
-                HistoryScanCardView(scan: scan)
-                    .contextMenu { //This section creates a delete button for the card on long press
-                        Button(action: deleteScan) {
-                            Label("Delete", systemImage: "trash")
+                
+                if(scan.networkScan) {
+                    HistoryScanCardView(scan: scan)
+                        .contextMenu { //This section creates a delete button for the card on long press
+                            Button(action: deleteScan) {
+                                Label("Delete", systemImage: "trash")
+                            }
                         }
-                    }
+                } else { //Shodan Result
+                    HistoryShodanCardView(scan: scan)
+                        .contextMenu {
+                            Button(action: deleteScan) {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
+                }
             }
         }
         

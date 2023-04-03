@@ -31,6 +31,7 @@
 		566E74E029A2CCB50055C999 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74DF29A2CCB50055C999 /* ScanView.swift */; };
 		566E74E229A2CCEC0055C999 /* ShodanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74E129A2CCEC0055C999 /* ShodanView.swift */; };
 		566E74E429A2CD050055C999 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E74E329A2CD050055C999 /* HistoryView.swift */; };
+		567C817929DA62DF006C7363 /* HistoryShodanCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567C817829DA62DF006C7363 /* HistoryShodanCardView.swift */; };
 		5697AC3C29C7840200F371AF /* ScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5697AC3B29C7840200F371AF /* ScanResult.swift */; };
 		56BFE4F129A2DDFE0079216D /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */; };
 		56D0999A29C8063A005597CE /* HistoryScanDetailsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0999929C8063A005597CE /* HistoryScanDetailsCardView.swift */; };
@@ -87,6 +88,7 @@
 		566E74DF29A2CCB50055C999 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
 		566E74E129A2CCEC0055C999 /* ShodanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShodanView.swift; sourceTree = "<group>"; };
 		566E74E329A2CD050055C999 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		567C817829DA62DF006C7363 /* HistoryShodanCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryShodanCardView.swift; sourceTree = "<group>"; };
 		5697AC3B29C7840200F371AF /* ScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResult.swift; sourceTree = "<group>"; };
 		56BFE4F029A2DDFE0079216D /* AuthenticationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
 		56D0999929C8063A005597CE /* HistoryScanDetailsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScanDetailsCardView.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				5638AFC329A786CC0072A21B /* SettingsView.swift */,
 				6FFF618129C7DED000C0DAE6 /* HistoryScanCardView.swift */,
 				56D0999929C8063A005597CE /* HistoryScanDetailsCardView.swift */,
+				567C817829DA62DF006C7363 /* HistoryShodanCardView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				5629AD3F29A2F23F0061A60F /* LoginView.swift in Sources */,
 				566E74E029A2CCB50055C999 /* ScanView.swift in Sources */,
 				5629AD4429A33B480061A60F /* SignUpView.swift in Sources */,
+				567C817929DA62DF006C7363 /* HistoryShodanCardView.swift in Sources */,
 				6FFF618229C7DED000C0DAE6 /* HistoryScanCardView.swift in Sources */,
 				5634F41A29D94DAF00907F0A /* ShodanAPI.swift in Sources */,
 				5697AC3C29C7840200F371AF /* ScanResult.swift in Sources */,
