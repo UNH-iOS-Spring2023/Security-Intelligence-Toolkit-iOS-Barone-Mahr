@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreFoundation
+import FirebaseFirestore
 
 struct Util {
     /// Performs a network TCP port scan on an IPv4 address or CIDR subnet range
@@ -195,6 +196,154 @@ struct Util {
         }
     }
     
+    static func doShodanQuery(apiKey: String, scanType: ShodanScanType, uid: String, input: String) {
+        let api = ShodanAPI(apiKey: apiKey)
+        
+        let dispatchGroup = DispatchGroup()
+        var apiConnectionSuccessful = false
+        var returnData: Any?
+        var errorData: String?
+        
+        dispatchGroup.enter()
+        api.testAPIConnection { result in
+            switch result {
+            case .success(let isConnected):
+                if isConnected {
+                    apiConnectionSuccessful = true
+                } else {
+                    errorData = "ERROR: API connection failed, verify API Key!"
+                }
+            case .failure(let error):
+                errorData = "ERROR: \(error.localizedDescription)"
+            }
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        
+        if(apiConnectionSuccessful) {
+            switch scanType {
+            case .SHODAN_PUBLIC_IP:
+                api.getPublicIPAddress { result in
+                    switch result {
+                    case .success(let publicIP):
+                        returnData = publicIP
+                    case .failure(let error):
+                        errorData = "ERROR: \(error.localizedDescription)"
+                        apiConnectionSuccessful = false
+                    }
+                    dispatchGroup.leave()
+                }
+            case .SHODAN_SEARCH_IP:
+                api.getHostInformation(ipAddress: input) { result in
+                    switch result {
+                    case .success(let hostInfo):
+                        returnData = hostInfo
+                    case .failure(let error):
+                        errorData = "ERROR: \(error.localizedDescription)"
+                        apiConnectionSuccessful = false
+                    }
+                    dispatchGroup.leave()
+                }
+            case .SHODAN_FILTER_SEARCH:
+                api.search(query: input) { result in
+                    switch result {
+                    case .success(let searchResults):
+                        returnData = searchResults
+                    case .failure(let error):
+                        errorData = "ERROR: \(error.localizedDescription)"
+                        apiConnectionSuccessful = false
+                    }
+                    dispatchGroup.leave()
+                }
+            }
+        } else {
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            if apiConnectionSuccessful, let returnData = returnData {
+                print("Shodan Return Data: \(returnData)")
+                saveShodanQuery(queryData: returnData, scanType: scanType, uid: uid, input: input)
+            } else {
+                print(errorData!)
+            }
+        }
+    }
+    
+    static func saveShodanQuery(queryData: Any, scanType: ShodanScanType, uid: String, input: String) {
+        var data: [String: Any] = [:]
+        
+        data["attemptedScan"] = ""
+        data["createdTime"] = Date()
+        data["localScan"] = false
+        data["networkScan"] = false
+        data["results"] = []
+        var results: [[String: Any]] = []
+        var dict: [String: Any] = [:]
+        
+        switch scanType {
+        case .SHODAN_PUBLIC_IP:
+            data["scanType"] = "SHODAN_PUBLIC_IP"
+            data["attemptedScan"] = (queryData as? String)?.dropFirst().dropLast() // Shodan ouput puts IP in "s, this removes them.
+            var result: [String] = []
+            dict["SHODAN_PUBLIC_SCAN"] = result
+            results.append(dict)
+        case .SHODAN_SEARCH_IP:
+            data["scanType"] = "SHODAN_SEARCH_IP"
+            
+            let queryDict = queryData as! [String: Any]
+            
+            var result: [NSNumber] = []
+            result = queryDict["ports"] as! [NSNumber]
+            dict[input] = result
+            results.append(dict)
+            
+            data["attemptedScan"] = "\(queryDict["org"] ?? "Org Unknown"), \(queryDict["city"] ?? "City Unknown"), \(queryDict["region_code"] ?? "Region Unknown"), \(queryDict["country_code"] ?? "Country Unknown")"
+            
+            
+        case .SHODAN_FILTER_SEARCH:
+            data["scanType"] = "SHODAN_FILTER_SEARCH"
+            data["attemptedScan"] = input
+            
+            let queryDict = queryData as! [String: Any]
+            let matches = queryDict["matches"] as! [[String: Any]]
+            
+            var info = ""
+            
+            matches.forEach { match in
+                info.append("Title: \(match["title"] ?? "")")
+                if let query = match["query"] as? String, !query.isEmpty {
+                    info.append("\nQuery Found: \(String(describing: match["query"]))")
+                }
+                if let description = match["description"] as? String, !description.isEmpty {
+                    info.append("\nDescription: \(String(describing: match["description"]))\n\n")
+                }
+            }
+            
+            var result: [String] = []
+            dict[info] = result
+            results.append(dict)
+        }
+        
+        data["uid"] = uid
+        data["results"] = results
+        
+        let db = Firestore.firestore()
+        db.collection("scans").addDocument(data: data) { error in
+            if let error = error {
+                
+            } else {
+                
+            }
+        }
+    }
+}
+
+enum ShodanScanType {
+    case SHODAN_PUBLIC_IP
+    case SHODAN_FILTER_SEARCH
+    case SHODAN_SEARCH_IP
 }
 
 // https://stackoverflow.com/questions/35700281/date-format-in-swift

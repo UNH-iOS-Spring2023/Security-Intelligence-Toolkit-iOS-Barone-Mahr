@@ -18,17 +18,26 @@ struct HistoryView: View {
         let list = ScrollView{
             ForEach(previousScans, id: \.self.id){
                 (scan: ScanResult) in
-                HistoryScanCardView(scan: scan)
-                    .contextMenu { //This section creates a delete button for the card on long press
-                        Button(action: deleteScan) {
-                            Label("Delete", systemImage: "trash")
+                
+                if(scan.networkScan) {
+                    HistoryScanCardView(scan: scan)
+                        .contextMenu { //This section creates a delete button for the card on long press
+                            Button(action: deleteScan) {
+                                Label("Delete", systemImage: "trash")
+                            }
                         }
-                    }
+                } else { //Shodan Result
+                    HistoryShodanCardView(scan: scan)
+                        .contextMenu {
+                            Button(action: deleteScan) {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
+                }
             }
         }
         
         if(app.isShowingScanResult){
-            //TODO: BUILD OUT SCAN RESULT UNIQUE VIEW
             ZStack{
                 CustomColors.gray?.suColor
                     .ignoresSafeArea()
@@ -40,12 +49,39 @@ struct HistoryView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                     } else {
-                        //TODO: Shodan Query
+                        switch(app.selectedScan!.scanType) {
+                        case "SHODAN_SEARCH_IP":
+                            Text("Shodan Search IP Result: \(((app.selectedScan!.results as? [[String: Any]])?.first?.keys.first as? String)!)")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        case "SHODAN_PUBLIC_IP":
+                            Text("Shodan Public IP Result: \(app.selectedScan!.attemptedScan)")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        case "SHODAN_FILTER_SEARCH":
+                            Text("Shodan Search Filter Result: \(app.selectedScan!.attemptedScan)")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        default:
+                            Text("INVALID_SHODAN_TYPE: \(app.selectedScan!.attemptedScan)")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
                     }
                     Spacer()
                     
                     if(app.selectedScan!.networkScan) {
                         HistoryScanDetailsCardView(scan: app.selectedScan!)
+                    } else { // Shodan Query Result
+                        if(app.selectedScan!.scanType == "SHODAN_SEARCH_IP") {
+                            HistoryScanDetailsCardView(scan: app.selectedScan!)
+                        } else {
+                            HistoryShodanDetailsCardView(scan: app.selectedScan!)
+                        }
                     }
                     
                     Spacer()

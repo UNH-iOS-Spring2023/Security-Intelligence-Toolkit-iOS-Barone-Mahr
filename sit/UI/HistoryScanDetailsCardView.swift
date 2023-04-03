@@ -23,6 +23,10 @@ struct HistoryScanDetailsCardView: View {
         } else {
             self.height = 300
         }
+        
+        if(!scan.networkScan) { //Shodan should be taller to include org info
+            self.height = 300
+        }
     }
     
     
@@ -37,9 +41,21 @@ struct HistoryScanDetailsCardView: View {
                 AnyView(
                     ScrollView {
                         VStack(alignment: .leading){
-                            Text("Network Scan: \(scan.attemptedScan)")
-                                .font(.system(size: 18, weight: .bold))
-                                .foregroundColor(CustomColors.black?.suColor)
+                            if(scan.networkScan) {
+                                Text("Network Scan: \(scan.attemptedScan)")
+                                    .font(.system(size: 18, weight: .bold))
+                                    .foregroundColor(CustomColors.black?.suColor)
+                            } else { // Shodan Search IP
+                                Text("Shodan Search IP: \(((scan.results as? [[String: Any]])?.first?.keys.first as? String)!)")
+                                    .font(.system(size: 18, weight: .bold))
+                                    .foregroundColor(CustomColors.black?.suColor)
+                            }
+                            
+                            if(!scan.networkScan) {
+                                Text("Organization: \(scan.attemptedScan)")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .foregroundColor(CustomColors.black?.suColor)
+                            }
                             
                             Text(scan.createdTime.getFormattedDate(format: "EEEE, MMM d, yyyy h:mm a"))
                                 .font(.system(size: 16))
