@@ -38,7 +38,6 @@ struct HistoryView: View {
         }
         
         if(app.isShowingScanResult){
-            //TODO: BUILD OUT SCAN RESULT UNIQUE VIEW
             ZStack{
                 CustomColors.gray?.suColor
                     .ignoresSafeArea()
@@ -50,12 +49,37 @@ struct HistoryView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                     } else {
-                        //TODO: Shodan Query
+                        switch(app.selectedScan!.scanType) {
+                        case "SHODAN_SEARCH_IP":
+                            Text("Shodan Search IP Result: \(((app.selectedScan!.results as? [[String: Any]])?.first?.keys.first as? String)!)")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        case "SHODAN_PUBLIC_IP":
+                            Text("Shodan Public IP Result: \(app.selectedScan!.attemptedScan)")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        case "SHODAN_FILTER_SEARCH":
+                            Text("Shodan Search Filter Result: \(app.selectedScan!.attemptedScan)")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        default:
+                            Text("INVALID_SHODAN_TYPE: \(app.selectedScan!.attemptedScan)")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
                     }
                     Spacer()
                     
                     if(app.selectedScan!.networkScan) {
                         HistoryScanDetailsCardView(scan: app.selectedScan!)
+                    } else { // Shodan Query Result
+                        if(app.selectedScan!.scanType == "SHODAN_SEARCH_IP") {
+                            HistoryScanDetailsCardView(scan: app.selectedScan!)
+                        }
                     }
                     
                     Spacer()

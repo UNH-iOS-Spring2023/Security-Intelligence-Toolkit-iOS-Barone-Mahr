@@ -44,7 +44,7 @@ class ScanResult: ObservableObject {
     func getNetworkScanResults() -> [(String, [String])] {
         var list: [(String, [String])] = []
         
-        if self.networkScan {
+        if(self.networkScan || (!self.networkScan && self.scanType == "SHODAN_SEARCH_IP")) {
             for result in self.results {
                 guard let resultDict = result as? [String: [NSNumber]] else {
                     continue // Skip to the next iteration if the result dictionary is not in the expected format
