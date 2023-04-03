@@ -196,6 +196,161 @@ struct Util {
         }
     }
     
+    
+    /// Retrieves the Broadcast Address and Netmask address from the device
+    /// - Returns: A tuple containing the broadcast address and netmask for the WIFI Adapter on the given iOS device
+    static func getWifiBroadcastAndNetmask() -> (gateway: String?, netmask: String?) {
+        // Get the list of all network interfaces on the device
+        var ifaddr: UnsafeMutablePointer<ifaddrs>?
+        guard getifaddrs(&ifaddr) == 0 else { return (nil, nil) }
+        defer { freeifaddrs(ifaddr) }
+        
+        // Loop through the list of interfaces
+        var broadcastAddress: String?
+        var netmaskAddress: String?
+        var ptr = ifaddr // pointer to keep track of which interface you are on
+        while ptr != nil {
+            let interface = ptr!.pointee
+            let addrFamily = interface.ifa_addr.pointee.sa_family
+            if addrFamily == UInt8(AF_INET) {
+                // Found an interface with an IPV4 address value
+                let ifaName = String(cString: interface.ifa_name)
+                if ifaName == "en0" {
+                    // the name of the interface maps to the WIFI adapter
+                    var addrBuf = [CChar](repeating: 0, count: Int(NI_MAXHOST)) //create a buffer to hold the value of the broadcast address
+                    if getnameinfo(interface.ifa_dstaddr, socklen_t(interface.ifa_dstaddr.pointee.sa_len), &addrBuf, socklen_t(addrBuf.count), nil, socklen_t(0), NI_NUMERICHOST) == 0 {
+                        // Convert the broadcast address buffer to a string
+                        let broadcastAddrStr = String(cString: addrBuf)
+                        broadcastAddress = broadcastAddrStr
+                    }
+                    // Get the netmask address
+                    var netmaskAddrBuf = [CChar](repeating: 0, count: Int(NI_MAXHOST)) //buffer to hold the netmask address
+                    if getnameinfo(interface.ifa_netmask, socklen_t(interface.ifa_netmask.pointee.sa_len), &netmaskAddrBuf, socklen_t(netmaskAddrBuf.count), nil, socklen_t(0), NI_NUMERICHOST) == 0 {
+                        // Convert the netmask address buffer to a string
+                        let netmaskAddrStr = String(cString: netmaskAddrBuf)
+                        netmaskAddress = netmaskAddrStr
+                    }
+                    break
+                }
+            }
+            ptr = ptr!.pointee.ifa_next // move on to the next network interface
+        }
+        
+        return (broadcastAddress, netmaskAddress)
+    }
+    
+    
+    ///  Calculates and returns the CIDR notation for the subnet of the iOS device's IP Address.
+    ///
+    /// - Parameters:
+    ///     - broadcastAddress : String containing the broadcast address
+    ///     - netmask : String containing the netmask address
+    ///
+    /// - Returns: The string containing the complete CIDR notation for the subnet of the iOS device IP Address.
+    ///
+    static func getCIDRNotation(broadcastAddress: String, netmask: String) -> String? {
+        
+        // Convert the broadcast address and netmask to binary format
+        guard let broadcastBinary = ipAddressToBinary(ipAddress: broadcastAddress),
+              let netmaskBinary = ipAddressToBinary(ipAddress: netmask) else {
+            return nil
+        }
+
+        // Convert the binary strings to integers
+        guard let broadcastInt = Int(broadcastBinary, radix: 2),
+              let netmaskInt = Int(netmaskBinary, radix: 2) else {
+            return nil
+        }
+ 
+        // Calculate the bitwise AND of the broadcast address and netmask - this will produce the lowest IP address value of the IP Address subnet range.
+        let bitwiseResult = broadcastInt & netmaskInt
+    
+        
+        // Convert the bitwise result back to binary string format to be used for later calculations
+        let baseIPstring = String(bitwiseResult, radix: 2)
+        
+        // Convert the lowest ip address from binary format to IPv4 format for later usage
+        guard let baseIPForCidrString = binaryToIPv4(binary: baseIPstring) else { return "" }
+        
+        // pass the lowest ip address, the broadcast (top adddress) and the subnet mask to calculate the cidr notation of the subnet
+        guard let cidrValue = getCIDRValue( subnetMask: netmaskBinary) else { return "" }
+        
+        // concatenate the lowest ipaddress string and the cidr notation value for the subnet
+        let completeCIDR = baseIPForCidrString + "/" + cidrValue
+        
+        return completeCIDR
+    }
+
+    // Helper function to convert an IPv4 address to binary format
+    /// - Parameters:
+    ///    - ipAddress: String containing the ip address you wish to convert to binary
+    ///
+    /// - Returns: The binary string representation of the inputted ipaddress
+    ///
+    static func ipAddressToBinary(ipAddress: String) -> String? {
+        let components = ipAddress.components(separatedBy: ".") //separate out the values by removing the "."
+        guard components.count == 4 else { //check to make sure the format is correct
+            return nil
+        }
+        
+        var binaryString = ""
+        for component in components {
+            guard let octet = Int(component), octet >= 0 && octet <= 255 else {
+                return nil
+            }
+            let binaryOctet = String(octet, radix: 2).padLeft(toLength: 8, withPad: "0")
+            binaryString += binaryOctet
+        }
+        
+        return binaryString
+    }
+    
+    
+    // Helper function to convert an ip address in its binary format to its normal IPv4 address "xxx.xxx.xxx.xxx"
+    /// - Parameters:
+    ///    - binary: String containing the binary representation of the ip address
+    ///
+    /// - Returns: String containing the ip address converted from binary format
+    ///
+    static func binaryToIPv4(binary: String) -> String? {
+        // Ensure that the binary string is a valid IPv4 address in binary format and of length 32
+        guard binary.count == 32,
+              let decimal = UInt32(binary, radix: 2)
+        else {
+            return nil
+        }
+        
+        // Extract the octets from the decimal value (ie. break the ip address into its 4 components)
+        let octet1 = decimal >> 24 & 0xff
+        let octet2 = decimal >> 16 & 0xff
+        let octet3 = decimal >> 8 & 0xff
+        let octet4 = decimal & 0xff
+        
+        // Return the formatted IPv4 address string
+        return "\(octet1).\(octet2).\(octet3).\(octet4)"
+    }
+    
+    //this function takes the baseIP, the broadCastIP, and the subnet mask to the CIDR notation string
+    // Helper function to get the subnet cidr notation value
+    /// - Parameters:
+    ///    - baseIP: string containing the subnetMask value in order to calculate the subnet CIDR notation
+    ///
+    /// - Returns: String containing the subnet value in CIDR notation
+    static func getCIDRValue(subnetMask: String) -> String? {
+        // Convert the binary string to an integer
+        guard let mask = UInt32(subnetMask, radix: 2) else {
+            return nil
+        }
+        
+        // Calculate the number of host bits
+        let numHostBits = 32 - mask.nonzeroBitCount
+        
+        // Calculate the cidr notation number by subtracting number of host bits from 32
+        let cidrNotation = "\(32 - numHostBits)"
+        
+        return cidrNotation
+    }
+
     static func doShodanQuery(apiKey: String, scanType: ShodanScanType, uid: String, input: String) {
         let api = ShodanAPI(apiKey: apiKey)
         
@@ -358,5 +513,18 @@ extension Date {
         let dateformat = DateFormatter()
         dateformat.dateFormat = format
         return dateformat.string(from: self)
+    }
+}
+
+// Helper function to pad a binary string to a specified length with leading zeroes
+/// - Parameters:
+///    - toLength: string value that sets the end desrired length
+///    - withPad: string containing the binary value that needs to be padded for proper handling
+/// - Returns: the binary string with any padding needed to make it the proper length for ip address handling
+extension String {
+    func padLeft(toLength length: Int, withPad pad: String) -> String {
+        let padCount = length - self.count
+        guard padCount > 0 else { return self }
+        return String(repeating: pad, count: padCount) + self
     }
 }
