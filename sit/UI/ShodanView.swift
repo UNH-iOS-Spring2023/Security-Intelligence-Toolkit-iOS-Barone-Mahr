@@ -21,7 +21,7 @@ struct ShodanView: View {
             
             VStack {
                 Button(action: {
-                    doShodan(scanType: .SHODAN_SEARCH_IP, input: "8.8.8.8")
+                    doShodan(scanType: .SHODAN_FILTER_SEARCH, input: "webcam")
                 }, label: {
                     Text("Test Shodan")
                         .font(.callout)

@@ -305,18 +305,28 @@ struct Util {
         case .SHODAN_FILTER_SEARCH:
             data["scanType"] = "SHODAN_FILTER_SEARCH"
             data["attemptedScan"] = input
+            
+            let queryDict = queryData as! [String: Any]
+            let matches = queryDict["matches"] as! [[String: Any]]
+            
+            var info = ""
+            
+            matches.forEach { match in
+                info.append("Title: \(match["title"] ?? "")")
+                if let query = match["query"] as? String, !query.isEmpty {
+                    info.append("\nQuery Found: \(String(describing: match["query"]))")
+                }
+                if let description = match["description"] as? String, !description.isEmpty {
+                    info.append("\nDescription: \(String(describing: match["description"]))\n\n")
+                }
+            }
+            
+            var result: [String] = []
+            dict[info] = result
+            results.append(dict)
         }
         
         data["uid"] = uid
-        
-        
-        if(scanType == .SHODAN_PUBLIC_IP) {
-            
-        } else {
-            
-        }
-        
-        
         data["results"] = results
         
         let db = Firestore.firestore()
