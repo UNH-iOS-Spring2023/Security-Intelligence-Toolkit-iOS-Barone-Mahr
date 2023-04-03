@@ -17,6 +17,9 @@ struct ScanView: View {
     
     @State private var errorMessage = ""
     @State private var alertError = false
+    @State private var broadcastIPV4Address = ""
+    @State private var netmask = ""
+    @State private var subnetCIDR = ""
     
     var body: some View {
         ZStack {
@@ -65,13 +68,13 @@ struct ScanView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading)
 
-                Button(action: {
-                    // TODO: do local scan
-                }, label: {
-                    Text("Start Local Scan")
-                        .font(.callout)
-                        .bold()
-                })
+                Button(action:  doLocalScan,
+                    label: {
+                        Text("Start Local Scan")
+                            .font(.callout)
+                            .bold()
+                    }
+                )
                 .frame(maxWidth: .infinity, minHeight: 44)
                 .background(CustomColors.pink?.suColor)
                 .foregroundColor(.white)
@@ -85,6 +88,7 @@ struct ScanView: View {
             }
         }
     }
+
     
     ///This function conducts the remote scan based on the user input. 
     private func doRemoteScan() {
@@ -120,6 +124,22 @@ struct ScanView: View {
         }
     }
     
+    
+    private func doLocalScan() {
+        let (broadcastIPV4Address, netmask)  = Util.getWifiBroadcastAndNetmask()
+        self.alertError = true
+        
+        if let gateway = broadcastIPV4Address, let net = netmask {
+            // Call the getCIDRNotation function with the gateway and netmask values
+            if let cidrNotation = Util.getCIDRNotation(broadcastAddress: gateway, netmask: net) {
+                self.errorMessage = "Local Broadcast Address found: \(gateway)\nNetmask: \(net) \nSubnet CIDR:\(cidrNotation)"
+            } else {
+                self.errorMessage = "Failed to calculate CIDR notation"
+            }
+        } else {
+            self.errorMessage = "Failed to get gateway and netmask addresses"
+        }
+    }
     
     ///Function to send a notification to the user about the scan status
     /// - PARAMETERS:
