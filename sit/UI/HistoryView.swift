@@ -79,6 +79,8 @@ struct HistoryView: View {
                     } else { // Shodan Query Result
                         if(app.selectedScan!.scanType == "SHODAN_SEARCH_IP") {
                             HistoryScanDetailsCardView(scan: app.selectedScan!)
+                        } else {
+                            HistoryShodanDetailsCardView(scan: app.selectedScan!)
                         }
                     }
                     
