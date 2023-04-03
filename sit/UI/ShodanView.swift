@@ -14,16 +14,98 @@ import Firebase
 struct ShodanView: View {
     @EnvironmentObject var authState: AuthenticationState
     
+    @State private var shodanQuery: String = ""
+    @State private var selectedOption = 0
+    @State private var isTextFieldVisible = false
+    @State private var queryPlaceholder = ""
+    let options = ["My Public IP", "Search Filter (e.g. webcam)", "Search IP"]
+    
     var body: some View {
         ZStack {
             CustomColors.gray?.suColor
                 .ignoresSafeArea()
             
             VStack {
+                if isTextFieldVisible {
+                    TextField("", text: $shodanQuery)
+                        .autocapitalization(.none)
+                        .foregroundColor(.white)
+                        .placeholder(when: shodanQuery.isEmpty) {
+                            Text(queryPlaceholder).foregroundColor(.gray)
+                        }
+                        .padding(.leading)
+                        .padding(.trailing)
+                        .overlay(
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(.white)
+                                .offset(y: 16)
+                                .padding(.horizontal, 16) // match button width
+                        )
+                }
+                
+                Spacer().frame(height: 16)
+                
+                Menu {
+                    ForEach(0 ..< 3) { index in
+                        Button(action: {
+                            self.selectedOption = index
+                            self.isTextFieldVisible = index > 0
+                            
+                            switch index {
+                            case 1:
+                                shodanQuery = ""
+                                queryPlaceholder = "Query String"
+                            case 2:
+                                shodanQuery = ""
+                                queryPlaceholder = "IPv4 Address"
+                            default:
+                                queryPlaceholder = ""
+                                shodanQuery = ""
+                            }
+                        }, label: {
+                            Text(options[index])
+                                .foregroundColor(.white)
+                        })
+                    }
+                } label: {
+                    HStack {
+                        Text(options[selectedOption])
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Image(systemName: "chevron.down")
+                            .foregroundColor(.white)
+                    }
+                }
+                .menuStyle(DefaultMenuStyle())
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.leading)
+                .padding(.trailing)
+                .overlay(
+                    Rectangle()
+                        .frame(height: 1)
+                        .foregroundColor(.white)
+                        .offset(y: 16)
+                        .padding(.horizontal, 16)
+                )
+                
+                Spacer().frame(height: 16)
+                
                 Button(action: {
-                    doShodan(scanType: .SHODAN_FILTER_SEARCH, input: "webcam")
+                    switch selectedOption {
+                    case 0:
+                        doShodan(scanType: .SHODAN_PUBLIC_IP, input: "")
+                    case 1:
+                        doShodan(scanType: .SHODAN_FILTER_SEARCH, input: shodanQuery)
+                    case 2:
+                        doShodan(scanType: .SHODAN_SEARCH_IP, input: shodanQuery)
+                    default:
+                        print("ERROR: Invalid selection...")
+                    }
+                    
                 }, label: {
-                    Text("Test Shodan")
+                    Text("Run Shodan")
                         .font(.callout)
                         .bold()
                 })
