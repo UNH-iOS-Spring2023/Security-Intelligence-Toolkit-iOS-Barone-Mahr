@@ -10,13 +10,18 @@ import SwiftUI
 struct HistoryShodanDetailsCardView: View {
     @ObservedObject var scan: ScanResult
     private var height: CGFloat = 150
+    private var list: [String]
     
     init(
         scan: ScanResult
     ){
         self.scan = scan
+        self.list = []
+        if(scan.scanType == "SHODAN_FILTER_SEARCH") {
+            self.list = scan.getShodanFilterResults()
+        }
         
-        if(self.scan.scanType == "SHODAN_PUBLIC_IP") {
+        if(scan.scanType == "SHODAN_PUBLIC_IP") {
             self.height = 150
         } else {
             self.height = 300
@@ -63,7 +68,11 @@ struct HistoryShodanDetailsCardView: View {
                             }
                             
                             if(self.scan.scanType == "SHODAN_FILTER_SEARCH") {
-                                
+                                ForEach(list, id: \.self) { str in
+                                    Text(str)
+                                        .padding(.leading, 20)
+                                        .foregroundColor(CustomColors.black?.suColor)
+                                }
                             }
                             
                         }

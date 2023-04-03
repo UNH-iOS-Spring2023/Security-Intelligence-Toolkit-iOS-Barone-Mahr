@@ -58,5 +58,28 @@ class ScanResult: ObservableObject {
         
         return list
     }
+    
+    func getShodanFilterResults() -> [String] {
+        var output = [String]()
+        
+        if(self.scanType == "SHODAN_FILTER_SEARCH") {
+            let original = ((self.results as? [[String: Any]])?.first?.keys.first as? String)!
+            let lines = original.components(separatedBy: "\n")
+            
+            for line in lines {
+                if line.starts(with: "Title:") && output.count > 0 {
+                    output.append("")
+                }
+                if let index = line.range(of: "Title:")?.lowerBound {
+                    output.append(String(line[..<index]))
+                    output.append(String(line[index...]))
+                } else {
+                    output.append(String(line))
+                }
+            }
+        }
+        
+        return output
+    }
 }
 
