@@ -107,14 +107,19 @@ struct ScanView: View {
                         DispatchQueue.main.async {
                             self.errorMessage = "Error saving scan results: \(error)"
                             self.alertError = true
+                            print("error in dispatch")
+                            self.sendNotification(title: "Network Scan Failed", body: "Error saving scan results: \(error)")
                         }
-                        sendNotification(title: "Network Scan Failed", body: "Error saving scan results: \(error)")
+                        
                     } else {
                         DispatchQueue.main.async {
                             self.errorMessage = "Finished Scan on \(subnetToScan)."
                             self.alertError = true
+                            print("presend notification")
+                            self.sendNotification(title: "Network Scan Completed", body: "Network scan completed successfully.")
+                            print("post send notification")
                         }
-                        sendNotification(title: "Network Scan Completed", body: "Network scan completed successfully.")
+                        
                     }
                 }
             }
@@ -149,7 +154,8 @@ struct ScanView: View {
         let notification = UNMutableNotificationContent()
         notification.title = title
         notification.body = body
-        let request = UNNotificationRequest(identifier: "networkScanNotification", content: notification, trigger: nil)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 4, repeats: false)
+        let request = UNNotificationRequest(identifier: "networkScanNotification", content: notification, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
             if let error = error {
                 print("Error sending notification: \(error.localizedDescription)")
