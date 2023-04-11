@@ -20,6 +20,9 @@ struct ShodanView: View {
     @State private var queryPlaceholder = ""
     let options = ["My Public IP", "Search Filter (e.g. webcam)", "Search IP"]
     
+    @State private var errorMessage = ""
+    @State private var alertError = false
+    
     var body: some View {
         ZStack {
             CustomColors.gray?.suColor
@@ -115,23 +118,44 @@ struct ShodanView: View {
                 .cornerRadius(8)
                 .padding(.horizontal)
             }
+            .alert(errorMessage, isPresented: $alertError){ //display an alert if anything happens during this?
+                Button("OK", role: .cancel){}
+            }
         }
     }
     
     private func doShodan(scanType: ShodanScanType, input: String) {
         guard let userId = authState.user?.uid else { return }
         
+        if(scanType == .SHODAN_SEARCH_IP) {
+            if(!Util.isValidIPv4(input)) {
+                self.errorMessage = "ERROR: Please provide a valid IPv4 Address!"
+                self.alertError = true
+                return
+            }
+        } else if(scanType == .SHODAN_FILTER_SEARCH) {
+            if(input == "") {
+                self.errorMessage = "ERROR: Query string cannot be empty!"
+                self.alertError = true
+                return
+            }
+        }
+        
         let db = Firestore.firestore()
         let settingsRef = db.collection("settings").document(userId)
         
         settingsRef.getDocument { document, error in
             guard let document = document, document.exists else {
-                print("ERROR: No Shodan Key set!")
+                self.errorMessage = "ERROR: No Shodan Key set!"
+                self.alertError = true
+                //print("ERROR: No Shodan Key set!")
                 return
             }
             
             if let shodanKeyValue = document.data()?["shodanKey"] as? String {
                 Util.doShodanQuery(apiKey: shodanKeyValue, scanType: scanType, uid: userId, input: input)
+                self.errorMessage = "Shodan Query Finished"
+                self.alertError = true
             }
         }
     }

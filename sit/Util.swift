@@ -263,7 +263,7 @@ struct Util {
         
         dispatchGroup.notify(queue: .main) {
             if apiConnectionSuccessful, let returnData = returnData {
-                print("Shodan Return Data: \(returnData)")
+                //print("Shodan Return Data: \(returnData)")
                 saveShodanQuery(queryData: returnData, scanType: scanType, uid: uid, input: input)
             } else {
                 print(errorData!)
