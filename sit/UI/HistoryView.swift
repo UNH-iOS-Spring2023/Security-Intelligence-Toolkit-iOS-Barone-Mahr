@@ -22,14 +22,18 @@ struct HistoryView: View {
                 if(scan.networkScan) {
                     HistoryScanCardView(scan: scan)
                         .contextMenu { //This section creates a delete button for the card on long press
-                            Button(action: deleteScan) {
+                            Button(action: {
+                                deleteScan(scan: scan)
+                            }) {
                                 Label("Delete", systemImage: "trash")
                             }
                         }
                 } else { //Shodan Result
                     HistoryShodanCardView(scan: scan)
                         .contextMenu {
-                            Button(action: deleteScan) {
+                            Button(action: {
+                                deleteScan(scan: scan)
+                            }) {
                                 Label("Delete", systemImage: "trash")
                             }
                         }
@@ -148,8 +152,19 @@ struct HistoryView: View {
     }
     
     ///This function deletes the user specified from the database and array of results displayed on the screen
-    private func deleteScan(){
-        // NEED TO FINISH FUNCTION TO MAKE DELETION WORK
+    private func deleteScan(scan: ScanResult){
+        guard let index = previousScans.firstIndex(where: { $0.id == scan.id }) else {
+            return
+        }
+        
+        let documentId = scan.id
+        Firestore.firestore().collection("scans").document(documentId).delete { error in
+            if let error = error {
+                print("Error deleting document: \(error)")
+            } else {
+                previousScans.remove(at: index)
+            }
+        }
     }
 }
 
