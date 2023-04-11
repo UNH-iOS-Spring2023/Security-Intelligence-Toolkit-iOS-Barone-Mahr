@@ -16,7 +16,7 @@ struct HistoryView: View {
     
     var body: some View {
         let list = ScrollView{
-            ForEach(previousScans, id: \.self.id){
+            ForEach(previousScans.sorted(by: { $0.createdTime > $1.createdTime }), id: \.self.id){
                 (scan: ScanResult) in
                 
                 if(scan.networkScan) {
