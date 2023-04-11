@@ -154,6 +154,8 @@ struct ShodanView: View {
             
             if let shodanKeyValue = document.data()?["shodanKey"] as? String {
                 Util.doShodanQuery(apiKey: shodanKeyValue, scanType: scanType, uid: userId, input: input)
+                self.errorMessage = "Shodan Query Finished"
+                self.alertError = true
             }
         }
     }
