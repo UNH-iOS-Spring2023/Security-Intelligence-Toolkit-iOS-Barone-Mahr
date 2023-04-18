@@ -17,6 +17,9 @@ struct ScanView: View {
     
     @State private var errorMessage = ""
     @State private var alertError = false
+    @State private var broadcastIPV4Address = ""
+    @State private var netmask = ""
+    @State private var subnetCIDR = ""
     
     var body: some View {
         ZStack {
@@ -65,13 +68,13 @@ struct ScanView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading)
 
-                Button(action: {
-                    // TODO: do local scan
-                }, label: {
-                    Text("Start Local Scan")
-                        .font(.callout)
-                        .bold()
-                })
+                Button(action:  doLocalScan,
+                    label: {
+                        Text("Start Local Scan")
+                            .font(.callout)
+                            .bold()
+                    }
+                )
                 .frame(maxWidth: .infinity, minHeight: 44)
                 .background(CustomColors.pink?.suColor)
                 .foregroundColor(.white)
@@ -85,6 +88,7 @@ struct ScanView: View {
             }
         }
     }
+
     
     ///This function conducts the remote scan based on the user input. 
     private func doRemoteScan() {
@@ -103,14 +107,19 @@ struct ScanView: View {
                         DispatchQueue.main.async {
                             self.errorMessage = "Error saving scan results: \(error)"
                             self.alertError = true
+                            print("error in dispatch")
+                            self.sendNotification(title: "Network Scan Failed", body: "Error saving scan results: \(error)")
                         }
-                        sendNotification(title: "Network Scan Failed", body: "Error saving scan results: \(error)")
+                        
                     } else {
                         DispatchQueue.main.async {
                             self.errorMessage = "Finished Scan on \(subnetToScan)."
                             self.alertError = true
+                            print("presend notification")
+                            self.sendNotification(title: "Network Scan Completed", body: "Network scan completed successfully.")
+                            print("post send notification")
                         }
-                        sendNotification(title: "Network Scan Completed", body: "Network scan completed successfully.")
+                        
                     }
                 }
             }
@@ -121,6 +130,22 @@ struct ScanView: View {
     }
     
     
+    private func doLocalScan() {
+        let (broadcastIPV4Address, netmask)  = Util.getWifiBroadcastAndNetmask()
+        self.alertError = true
+        
+        if let gateway = broadcastIPV4Address, let net = netmask {
+            // Call the getCIDRNotation function with the gateway and netmask values
+            if let cidrNotation = Util.getCIDRNotation(broadcastAddress: gateway, netmask: net) {
+                self.errorMessage = "Local Broadcast Address found: \(gateway)\nNetmask: \(net) \nSubnet CIDR:\(cidrNotation)"
+            } else {
+                self.errorMessage = "Failed to calculate CIDR notation"
+            }
+        } else {
+            self.errorMessage = "Failed to get gateway and netmask addresses"
+        }
+    }
+    
     ///Function to send a notification to the user about the scan status
     /// - PARAMETERS:
     ///    - title : string containing the title of the notification
@@ -129,7 +154,8 @@ struct ScanView: View {
         let notification = UNMutableNotificationContent()
         notification.title = title
         notification.body = body
-        let request = UNNotificationRequest(identifier: "networkScanNotification", content: notification, trigger: nil)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 4, repeats: false)
+        let request = UNNotificationRequest(identifier: "networkScanNotification", content: notification, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
             if let error = error {
                 print("Error sending notification: \(error.localizedDescription)")

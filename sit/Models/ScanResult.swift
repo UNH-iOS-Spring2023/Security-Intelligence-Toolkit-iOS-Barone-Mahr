@@ -44,7 +44,7 @@ class ScanResult: ObservableObject {
     func getNetworkScanResults() -> [(String, [String])] {
         var list: [(String, [String])] = []
         
-        if self.networkScan {
+        if(self.networkScan || (!self.networkScan && self.scanType == "SHODAN_SEARCH_IP")) {
             for result in self.results {
                 guard let resultDict = result as? [String: [NSNumber]] else {
                     continue // Skip to the next iteration if the result dictionary is not in the expected format
@@ -57,6 +57,29 @@ class ScanResult: ObservableObject {
         }
         
         return list
+    }
+    
+    func getShodanFilterResults() -> [String] {
+        var output = [String]()
+        
+        if(self.scanType == "SHODAN_FILTER_SEARCH") {
+            let original = ((self.results as? [[String: Any]])?.first?.keys.first as? String)!
+            let lines = original.components(separatedBy: "\n")
+            
+            for line in lines {
+                if line.starts(with: "Title:") && output.count > 0 {
+                    output.append("")
+                }
+                if let index = line.range(of: "Title:")?.lowerBound {
+                    output.append(String(line[..<index]))
+                    output.append(String(line[index...]))
+                } else {
+                    output.append(String(line))
+                }
+            }
+        }
+        
+        return output
     }
 }
 
