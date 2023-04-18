@@ -137,7 +137,34 @@ struct ScanView: View {
         if let gateway = broadcastIPV4Address, let net = netmask {
             // Call the getCIDRNotation function with the gateway and netmask values
             if let cidrNotation = Util.getCIDRNotation(broadcastAddress: gateway, netmask: net) {
-                self.errorMessage = "Local Broadcast Address found: \(gateway)\nNetmask: \(net) \nSubnet CIDR:\(cidrNotation)"
+                self.errorMessage = "Local Scan Started on: \(cidrNotation)"
+                DispatchQueue.global(qos: .background).async {
+                    var data: [String: Any] = Util.doTCPScan(cidrNotation)
+                    
+                    data["uid"] = authState.user?.uid
+                    data["localScan"] = true
+                    let db = Firestore.firestore()
+                    db.collection("scans").addDocument(data: data) { error in
+                        if let error = error {
+                            DispatchQueue.main.async {
+                                self.errorMessage = "Error saving scan results: \(error)"
+                                self.alertError = true
+                                print("error in dispatch")
+                                self.sendNotification(title: "Network Scan Failed", body: "Error saving scan results: \(error)")
+                            }
+                            
+                        } else {
+                            DispatchQueue.main.async {
+                                self.errorMessage = "Finished Scan on \(cidrNotation)."
+                                self.alertError = true
+                                print("presend notification")
+                                self.sendNotification(title: "Network Scan Completed", body: "Network scan completed successfully.")
+                                print("post send notification")
+                            }
+                            
+                        }
+                    }
+                }
             } else {
                 self.errorMessage = "Failed to calculate CIDR notation"
             }
