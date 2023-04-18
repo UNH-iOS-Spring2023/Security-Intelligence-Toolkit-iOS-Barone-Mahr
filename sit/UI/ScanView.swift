@@ -181,7 +181,7 @@ struct ScanView: View {
         let notification = UNMutableNotificationContent()
         notification.title = title
         notification.body = body
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 4, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 15, repeats: false)
         let request = UNNotificationRequest(identifier: "networkScanNotification", content: notification, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
             if let error = error {

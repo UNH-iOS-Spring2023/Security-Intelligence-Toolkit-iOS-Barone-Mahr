@@ -330,7 +330,6 @@ struct Util {
         return "\(octet1).\(octet2).\(octet3).\(octet4)"
     }
     
-    //this function takes the baseIP, the broadCastIP, and the subnet mask to the CIDR notation string
     // Helper function to get the subnet cidr notation value
     /// - Parameters:
     ///    - baseIP: string containing the subnetMask value in order to calculate the subnet CIDR notation
