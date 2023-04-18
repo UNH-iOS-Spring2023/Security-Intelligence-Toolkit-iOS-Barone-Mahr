@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import UserNotifications
 
 @main
 struct sitApp: App {
@@ -25,6 +26,16 @@ struct sitApp: App {
     
     init() {
         FirebaseApp.configure()
+        //Requests permission to send the user notifications
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+                    if let error = error {
+                        print("Error requesting notification authorization: \(error.localizedDescription)")
+                    } else if granted {
+                        print("Notification authorization granted")
+                    } else {
+                        print("Notification authorization denied")
+                    }
+        }
     }
     
     var body: some Scene {

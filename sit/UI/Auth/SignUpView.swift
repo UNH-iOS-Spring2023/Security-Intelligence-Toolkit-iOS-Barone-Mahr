@@ -143,6 +143,14 @@ struct SignUpView: View {
         }
     }
     
+    /// Performs sign up process using provided email, password, and password confirmation.
+    ///
+    /// - Parameters:
+    /// - email: The email to use for sign up.
+    /// - password: The password to use for sign up.
+    /// - passwordConf: The confirmation of password for sign up.
+    ///
+    /// - Returns: None. Updates authState.
     private func doSignUp() {
         authState.signUp(email: email, password: password, passwordConfirmation: passwordConf) { result in
             authState.isLoggingIn = false

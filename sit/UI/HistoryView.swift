@@ -4,6 +4,7 @@
 //
 //  Created by Charles Barone on 2/19/23.
 //
+/// This file defines the design and architecture of the overarching page used to display a user's history of scan results.
 
 import SwiftUI
 import Firebase
@@ -15,14 +16,32 @@ struct HistoryView: View {
     
     var body: some View {
         let list = ScrollView{
-            ForEach(previousScans, id: \.self.id){
+            ForEach(previousScans.sorted(by: { $0.createdTime > $1.createdTime }), id: \.self.id){
                 (scan: ScanResult) in
+                
+                if(scan.networkScan) {
                     HistoryScanCardView(scan: scan)
+                        .contextMenu { //This section creates a delete button for the card on long press
+                            Button(action: {
+                                deleteScan(scan: scan)
+                            }) {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
+                } else { //Shodan Result
+                    HistoryShodanCardView(scan: scan)
+                        .contextMenu {
+                            Button(action: {
+                                deleteScan(scan: scan)
+                            }) {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
+                }
             }
         }
         
         if(app.isShowingScanResult){
-            //TODO: BUILD OUT SCAN RESULT UNIQUE VIEW
             ZStack{
                 CustomColors.gray?.suColor
                     .ignoresSafeArea()
@@ -34,12 +53,39 @@ struct HistoryView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                     } else {
-                        //TODO: Shodan Query
+                        switch(app.selectedScan!.scanType) {
+                        case "SHODAN_SEARCH_IP":
+                            Text("Shodan Search IP Result: \(((app.selectedScan!.results as? [[String: Any]])?.first?.keys.first as? String)!)")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        case "SHODAN_PUBLIC_IP":
+                            Text("Shodan Public IP Result: \(app.selectedScan!.attemptedScan)")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        case "SHODAN_FILTER_SEARCH":
+                            Text("Shodan Search Filter Result: \(app.selectedScan!.attemptedScan)")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        default:
+                            Text("INVALID_SHODAN_TYPE: \(app.selectedScan!.attemptedScan)")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
                     }
                     Spacer()
                     
                     if(app.selectedScan!.networkScan) {
                         HistoryScanDetailsCardView(scan: app.selectedScan!)
+                    } else { // Shodan Query Result
+                        if(app.selectedScan!.scanType == "SHODAN_SEARCH_IP") {
+                            HistoryScanDetailsCardView(scan: app.selectedScan!)
+                        } else {
+                            HistoryShodanDetailsCardView(scan: app.selectedScan!)
+                        }
                     }
                     
                     Spacer()
@@ -57,7 +103,10 @@ struct HistoryView: View {
                     .padding(.horizontal)
                     .padding(.bottom, 16)
                 }
+                .background(CustomColors.gray?.suColor)
             }
+            .background(CustomColors.gray?.suColor)
+            
         }
         else{
             ZStack {
@@ -70,13 +119,18 @@ struct HistoryView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                     list
+                        .background(CustomColors.gray?.suColor)
+                        
+                    Spacer()
                 }
             }.onAppear() {
                 getPreviousScans()
             }
+            .background(CustomColors.gray?.suColor)
         }
     }
     
+    ///This function retrieves the saved scans from the database
     private func getPreviousScans() {
         let db = Firestore.firestore()
         self.previousScans = []
@@ -96,6 +150,22 @@ struct HistoryView: View {
                 }
             }
     }
+    
+    ///This function deletes the user specified from the database and array of results displayed on the screen
+    private func deleteScan(scan: ScanResult){
+        guard let index = previousScans.firstIndex(where: { $0.id == scan.id }) else {
+            return
+        }
+        
+        let documentId = scan.id
+        Firestore.firestore().collection("scans").document(documentId).delete { error in
+            if let error = error {
+                print("Error deleting document: \(error)")
+            } else {
+                previousScans.remove(at: index)
+            }
+        }
+    }
 }
 
 struct HistoryView_Previews: PreviewProvider {
@@ -104,3 +174,4 @@ struct HistoryView_Previews: PreviewProvider {
             .environmentObject(AppVariables())
     }
 }
+

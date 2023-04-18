@@ -4,8 +4,10 @@
 //
 //  Created by Charles Barone on 2/23/23.
 //
+/// This file defines the design and architecture of the Settings screen which provides users the opportunity to upload their Shodan Key or logout of the app.
 
 import SwiftUI
+import Firebase
 
 struct SettingsView: View {
     var showContentView: () -> Void
@@ -106,12 +108,45 @@ struct SettingsView: View {
                 }
             }
         }
+        .onAppear(perform: fetchShodanKey)
     }
     
+    /// This function will fetch the user's Shodan Key from the Firestore database
+    private func fetchShodanKey() {
+        guard let userId = authState.user?.uid else { return }
+        
+        let db = Firestore.firestore()
+        let settingsRef = db.collection("settings").document(userId)
+        
+        settingsRef.getDocument { document, error in
+            guard let document = document, document.exists else {
+                return
+            }
+            
+            if let shodanKeyValue = document.data()?["shodanKey"] as? String {
+                shodanKey = shodanKeyValue
+            }
+        }
+    }
+    
+    ///This function will save the users Shodan Key to the database
     private func saveShodanKey() {
-        // TODO: Write code here to save shodan key to firestore
+        guard let userID = authState.user?.uid else { return }
+        let db = Firestore.firestore()
+        let settingsRef = db.collection("settings").document(userID)
+        
+        let data: [String: Any] = ["shodanKey": shodanKey]
+        
+        settingsRef.setData(data, merge: true) { error in
+            if let error = error {
+                print("Error updating shodan key: \(error.localizedDescription)")
+            } else {
+                print("Shodan key saved successfully.")
+            }
+        }
     }
     
+    ///This function handles logging out the user and resetting the app to the home screen after relogin
     private func doLogOut() {
         showContentView() //Required so that they return to the home screen after logging back in.
         authState.logout()

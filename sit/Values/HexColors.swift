@@ -4,6 +4,7 @@
 //
 //  Created by Charles Barone on 2/19/23.
 //
+/// This file defines the custom colors used by the SIT Application.
 
 import SwiftUI
 
@@ -47,6 +48,7 @@ struct CustomColors {
     static let black = UIColor(hex: "#000000FF")
     static let gray = UIColor(hex: "#252525FF")
     static let white = UIColor(hex: "#FFFFFFFF")
+    static let red = UIColor(hex: "#FF000000")
     
 }
 
