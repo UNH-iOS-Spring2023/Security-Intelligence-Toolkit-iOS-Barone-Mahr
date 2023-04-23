@@ -67,6 +67,7 @@ struct SettingsView: View {
                                     .offset(y: 16)
                                     .padding(.horizontal, 0)
                             )
+                            .multilineTextAlignment(.center)
                         
                         Button(action: saveShodanKey, label: {
                             Text("Save Settings")
