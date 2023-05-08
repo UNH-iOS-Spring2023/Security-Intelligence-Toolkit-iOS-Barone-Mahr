@@ -88,6 +88,7 @@ struct HistoryScanDetailsCardView: View {
                             
                         }
                         .padding(.vertical, 25)
+                        .padding(.horizontal, 25)
                     }
                 )
             }

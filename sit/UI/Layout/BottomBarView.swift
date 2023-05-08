@@ -31,6 +31,8 @@ struct BottomBarView: View {
         UITabBar.appearance().barTintColor = UIColor(.clear)
         UITabBar.appearance().backgroundColor = CustomColors.purple
         UITabBar.appearance().unselectedItemTintColor = CustomColors.white
+        let fontAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0), NSAttributedString.Key.foregroundColor: UIColor.white]
+        UITabBarItem.appearance().setTitleTextAttributes(fontAttributes, for: .normal)
     }
     
     var body: some View {
@@ -63,7 +65,7 @@ struct BottomBarView: View {
                 }
                 .tag(3)
         }
-        .accentColor(CustomColors.black?.suColor)
+        .accentColor(CustomColors.gray?.suColor)
     }
 }
 
